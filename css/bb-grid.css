@@ -1,0 +1,141 @@
+/* ============================================
+   BB Grid — Line-based grid layout
+   Raycast-inspired 1px gap grid lines + dots
+   ============================================ */
+
+/* ---- Grid Container ---- */
+.bb-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--bb-border-dark);
+  width: 100%;
+}
+
+/* Every direct child gets a solid bg so the 1px gap shows as a line */
+.bb-grid > * {
+  background: var(--bb-surface-dark);
+  position: relative;
+}
+
+/* ---- Light theme variant ---- */
+.bb-grid--light {
+  background: var(--bb-border-light);
+}
+.bb-grid--light > * {
+  background: var(--bb-bg-1);
+}
+
+/* ---- Column Presets ---- */
+.bb-grid-5 { grid-template-columns: 1.7fr 1fr 1fr 1fr 1.7fr; }
+.bb-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.bb-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.bb-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* ---- Span Utilities ---- */
+.bb-col-span-2 { grid-column: span 2; }
+.bb-col-span-3 { grid-column: span 3; }
+.bb-row-span-2 { grid-row: span 2; }
+.bb-row-span-3 { grid-row: span 3; }
+
+/* ---- Dotted Pattern Overlay ---- */
+.bb-dots {
+  position: relative;
+}
+.bb-dots::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--bb-white-15) 0.5px, transparent 0px);
+  background-size: 17px 17px;
+  background-position: -8.5px -8.5px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Light variant dots */
+.bb-dots--light::after {
+  background-image: radial-gradient(rgba(31, 25, 21, 0.08) 0.5px, transparent 0px);
+}
+
+/* ---- Grid Cell (content card) ---- */
+.bb-grid-cell {
+  padding: var(--bb-space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--bb-space-8);
+  min-height: 200px;
+  position: relative;
+}
+
+/* ---- Figure Cell (illustration placeholder) ---- */
+.bb-grid-figure {
+  padding: var(--bb-space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+/* ---- FIG Label ---- */
+.bb-fig-label {
+  font-family: var(--bb-font-mono);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bb-text-subtle);
+  position: absolute;
+  top: var(--bb-space-4);
+  left: var(--bb-space-4);
+  z-index: 2;
+}
+
+/* ---- Arrow Link (top-right corner) ---- */
+.bb-grid-arrow {
+  position: absolute;
+  top: var(--bb-space-4);
+  right: var(--bb-space-4);
+  width: 16px;
+  height: 16px;
+  color: var(--bb-text-subtle);
+  z-index: 2;
+  transition: color var(--bb-duration-fast) var(--bb-ease-standard);
+}
+.bb-grid-cell:hover .bb-grid-arrow,
+.bb-grid-figure:hover .bb-grid-arrow {
+  color: var(--bb-text-inverted);
+}
+
+/* ---- Empty Grid Cell (just shows lines) ---- */
+.bb-grid-empty {
+  min-height: 48px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .bb-grid-5 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .bb-grid-5,
+  .bb-grid-4,
+  .bb-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bb-col-span-3 { grid-column: span 2; }
+  .bb-grid-figure { min-height: 200px; padding: var(--bb-space-8); }
+}
+
+@media (max-width: 480px) {
+  .bb-grid-5,
+  .bb-grid-4,
+  .bb-grid-3,
+  .bb-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .bb-col-span-2,
+  .bb-col-span-3 { grid-column: span 1; }
+}

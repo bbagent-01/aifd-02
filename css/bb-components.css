@@ -1,0 +1,207 @@
+/* ============================================
+   BB Components — Brightbase UI Components
+   ============================================ */
+
+/* ---- Button: Primary (accent) ---- */
+.bb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bb-space-2);
+  padding: 12px 28px;
+  font-family: var(--bb-font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  border: none;
+  border-radius: var(--bb-radius-full);
+  cursor: pointer;
+  transition: all var(--bb-duration-normal) var(--bb-ease-bounce);
+  text-decoration: none;
+}
+
+.bb-btn-primary {
+  background: var(--bb-accent);
+  color: var(--bb-dark);
+}
+.bb-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--bb-shadow-glow-accent);
+}
+
+.bb-btn-secondary {
+  background: var(--bb-white-10);
+  color: var(--bb-text-inverted);
+  border: 1px solid var(--bb-border-dark-strong);
+}
+.bb-btn-secondary:hover {
+  background: var(--bb-white-15);
+  transform: translateY(-1px);
+}
+
+.bb-btn-outline {
+  background: transparent;
+  color: var(--bb-text-primary);
+  border: 1px solid var(--bb-border-light);
+}
+.bb-btn-outline:hover {
+  background: var(--bb-bg-2);
+  transform: translateY(-1px);
+}
+
+.bb-btn-sm {
+  padding: 8px 20px;
+  font-size: 13px;
+}
+
+.bb-btn-lg {
+  padding: 16px 36px;
+  font-size: 16px;
+}
+
+/* ---- Card ---- */
+.bb-card {
+  background: var(--bb-bg-1);
+  border: 1px solid var(--bb-border-light);
+  border-radius: var(--bb-radius-16);
+  padding: var(--bb-space-6);
+  transition: all var(--bb-duration-normal) var(--bb-ease-bounce);
+}
+.bb-card:hover {
+  box-shadow: var(--bb-shadow-md);
+  transform: translateY(-2px);
+}
+
+.bb-card-dark {
+  background: var(--bb-surface-dark-card);
+  border: 1px solid var(--bb-border-dark-strong);
+  box-shadow: var(--bb-shadow-card-dark);
+}
+.bb-card-dark:hover {
+  border-color: var(--bb-white-15);
+}
+
+/* ---- Input ---- */
+.bb-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--bb-font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--bb-text-primary);
+  background: var(--bb-light);
+  border: 1px solid var(--bb-border-light);
+  border-radius: var(--bb-radius-12);
+  outline: none;
+  transition: all var(--bb-duration-fast) var(--bb-ease-standard);
+}
+.bb-input::placeholder {
+  font-family: var(--bb-font-mono);
+  color: var(--bb-text-subtle);
+  font-size: 13px;
+}
+.bb-input:focus {
+  border-color: var(--bb-dark);
+  box-shadow: 0 0 0 3px rgba(31, 25, 21, 0.08);
+}
+
+.bb-input-dark {
+  background: var(--bb-surface-dark-2);
+  border-color: var(--bb-border-dark-strong);
+  color: var(--bb-text-inverted);
+}
+.bb-input-dark:focus {
+  border-color: var(--bb-accent);
+  box-shadow: 0 0 0 3px rgba(212, 253, 128, 0.1);
+}
+
+/* ---- Badge ---- */
+.bb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  font-family: var(--bb-font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  border-radius: var(--bb-radius-full);
+  line-height: 1.4;
+}
+
+.bb-badge-green {
+  background: rgba(212, 253, 128, 0.12);
+  color: var(--bb-accent);
+}
+.bb-badge-amber {
+  background: rgba(250, 114, 90, 0.12);
+  color: var(--bb-coral);
+}
+.bb-badge-red {
+  background: rgba(250, 65, 73, 0.12);
+  color: var(--bb-red);
+}
+.bb-badge-neutral {
+  background: var(--bb-white-10);
+  color: var(--bb-text-subtle);
+}
+
+/* ---- Divider ---- */
+.bb-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--bb-border-light);
+  border: none;
+  margin: var(--bb-space-8) 0;
+}
+.bb-divider-dark {
+  background: var(--bb-border-dark);
+}
+
+/* ---- Section Wrapper ---- */
+.bb-section {
+  padding: var(--bb-space-24) var(--bb-site-padding);
+}
+.bb-section-lg {
+  padding: var(--bb-space-40) var(--bb-site-padding);
+}
+.bb-section-inner {
+  max-width: var(--bb-max-width);
+  margin: 0 auto;
+}
+
+/* ---- Tag / Pill ---- */
+.bb-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: var(--bb-font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--bb-text-subtle);
+  border: 1px solid var(--bb-border-dark-strong);
+  border-radius: var(--bb-radius-full);
+  text-transform: uppercase;
+}
+
+/* ---- External Link Pattern ---- */
+.bb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--bb-font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--bb-text-inverted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color var(--bb-duration-fast) var(--bb-ease-standard);
+}
+.bb-link:hover {
+  color: var(--bb-accent);
+}
+.bb-link svg {
+  width: 14px;
+  height: 14px;
+}

@@ -1,0 +1,105 @@
+/* ============================================
+   BB Tokens — Brightbase Design System v3
+   b150-inspired warm palette + Raycast grid
+   ============================================ */
+
+:root {
+  /* ---- Colors: Foundation ---- */
+  --bb-dark: #1f1915;
+  --bb-light: #fffdf6;
+  --bb-accent: #d4fd80;
+  --bb-red: #fa4149;
+  --bb-coral: #fa725a;
+
+  /* ---- Colors: Warm Backgrounds ---- */
+  --bb-bg-1: #f7f5f1;
+  --bb-bg-2: #f2efe9;
+  --bb-bg-3: #e6e3dd;
+
+  /* ---- Colors: Dark Surfaces ---- */
+  --bb-surface-dark: #0d0d0d;
+  --bb-surface-dark-2: #141414;
+  --bb-surface-dark-3: #1a1a1a;
+  --bb-surface-dark-card: #111111;
+
+  /* ---- Colors: Text ---- */
+  --bb-text-primary: #1f1915;
+  --bb-text-muted: #616161;
+  --bb-text-subtle: #9c9c9d;
+  --bb-text-inverted: #f7f5f1;
+  --bb-text-accent: #d4fd80;
+
+  /* ---- Colors: Borders ---- */
+  --bb-border-light: #e6e3dd;
+  --bb-border-dark: rgba(255, 255, 255, 0.06);
+  --bb-border-dark-strong: rgba(255, 255, 255, 0.12);
+
+  /* ---- Colors: Opacity Variants ---- */
+  --bb-dark-64: rgba(31, 25, 21, 0.64);
+  --bb-light-48: rgba(255, 253, 246, 0.48);
+  --bb-white-6: rgba(255, 255, 255, 0.06);
+  --bb-white-10: rgba(255, 255, 255, 0.10);
+  --bb-white-15: rgba(255, 255, 255, 0.15);
+  --bb-white-90: rgba(255, 255, 255, 0.90);
+
+  /* ---- Spacing ---- */
+  --bb-space-1: 4px;
+  --bb-space-2: 8px;
+  --bb-space-3: 12px;
+  --bb-space-4: 16px;
+  --bb-space-5: 20px;
+  --bb-space-6: 24px;
+  --bb-space-8: 32px;
+  --bb-space-10: 40px;
+  --bb-space-12: 48px;
+  --bb-space-16: 64px;
+  --bb-space-20: 80px;
+  --bb-space-24: 96px;
+  --bb-space-30: 120px;
+  --bb-space-40: 160px;
+  --bb-site-padding: 32px;
+
+  /* ---- Border Radius ---- */
+  --bb-radius-2: 2px;
+  --bb-radius-4: 4px;
+  --bb-radius-8: 8px;
+  --bb-radius-10: 10px;
+  --bb-radius-12: 12px;
+  --bb-radius-16: 16px;
+  --bb-radius-20: 20px;
+  --bb-radius-24: 24px;
+  --bb-radius-30: 30px;
+  --bb-radius-32: 32px;
+  --bb-radius-full: 100vw;
+
+  /* ---- Shadows ---- */
+  --bb-shadow-sm: 0 1px 2px rgba(31, 25, 21, 0.05);
+  --bb-shadow-md: 0 4px 12px rgba(31, 25, 21, 0.08);
+  --bb-shadow-lg: 0 12px 32px rgba(31, 25, 21, 0.12);
+  --bb-shadow-xl: 0 30px 50px rgba(0, 0, 0, 0.4);
+  --bb-shadow-glow-accent: 0 0 40px rgba(212, 253, 128, 0.15);
+  --bb-shadow-glow-blue: 0 0 40px rgba(86, 194, 255, 0.12);
+  --bb-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --bb-shadow-card-dark: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+
+  /* ---- Easings ---- */
+  --bb-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --bb-ease-bounce: cubic-bezier(0.23, 1, 0.32, 1);
+  --bb-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---- Transitions ---- */
+  --bb-duration-fast: 0.15s;
+  --bb-duration-normal: 0.3s;
+  --bb-duration-slow: 0.6s;
+  --bb-duration-reveal: 1s;
+
+  /* ---- Z-Index Scale ---- */
+  --bb-z-base: 0;
+  --bb-z-above: 10;
+  --bb-z-overlay: 100;
+  --bb-z-modal: 1000;
+
+  /* ---- Layout ---- */
+  --bb-max-width: 1440px;
+  --bb-content-width: 1200px;
+}
