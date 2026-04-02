@@ -4,44 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BB DS3 — Brightbase Design System v3</title>
-  <meta name="description" content="Brightbase Design System v3 — b150 warm palette + Raycast grid layout">
+  <meta name="description" content="Brightbase Design System v3 — Cream-first warm palette with cool dark complements">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Lenis Smooth Scroll CSS -->
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
 
   <style>
     /* ================================================
-       TOKENS
+       TOKENS — Cream-first + Cool Dark
        ================================================ */
     :root {
-      --bb-dark: #1f1915;
-      --bb-light: #fffdf6;
-      --bb-accent: #d4fd80;
-      --bb-red: #fa4149;
-      --bb-coral: #fa725a;
-      --bb-bg-1: #f7f5f1;
-      --bb-bg-2: #f2efe9;
-      --bb-bg-3: #e6e3dd;
-      --bb-surface-dark: #0d0d0d;
-      --bb-surface-dark-2: #141414;
-      --bb-surface-dark-3: #1a1a1a;
-      --bb-surface-dark-card: #111111;
-      --bb-text-primary: #1f1915;
-      --bb-text-muted: #616161;
-      --bb-text-subtle: #9c9c9d;
-      --bb-text-inverted: #f7f5f1;
-      --bb-text-accent: #d4fd80;
-      --bb-border-light: #e6e3dd;
-      --bb-border-dark: rgba(255, 255, 255, 0.06);
-      --bb-border-dark-strong: rgba(255, 255, 255, 0.12);
-      --bb-white-6: rgba(255, 255, 255, 0.06);
-      --bb-white-10: rgba(255, 255, 255, 0.10);
-      --bb-white-15: rgba(255, 255, 255, 0.15);
+      --bb-primary: #FE4E18;
+      --bb-primary-light: #FF7A4D;
+      --bb-primary-dark: #D93D0F;
+      --bb-secondary: #34474E;
+      --bb-secondary-light: #4A6068;
+      --bb-neutral: #6B7280;
+      --bb-neutral-light: #9CA3AF;
+
+      --bb-cream: #E8E4DD;
+      --bb-cream-light: #F2EFE9;
+      --bb-cream-lighter: #F7F5F1;
+      --bb-cream-lightest: #FFFDF6;
+
+      --bb-dark: #0D1E24;
+      --bb-dark-2: #132A32;
+      --bb-dark-3: #1A3540;
+      --bb-dark-card: #0F2229;
+      --bb-dark-elevated: #17303A;
+
+      --bb-text-primary: #0D1E24;
+      --bb-text-secondary: #34474E;
+      --bb-text-muted: #6B7280;
+      --bb-text-subtle: #9CA3AF;
+      --bb-text-on-dark: #E8E4DD;
+      --bb-text-on-dark-muted: #8A9BA3;
+      --bb-text-on-dark-subtle: #5A6E78;
+      --bb-text-on-primary: #FFFDF6;
+
+      --bb-border-warm: #D6D1C9;
+      --bb-border-warm-strong: #C4BEB5;
+      --bb-border-cool: rgba(232, 228, 221, 0.08);
+      --bb-border-cool-strong: rgba(232, 228, 221, 0.15);
+
+      --bb-primary-10: rgba(254, 78, 24, 0.10);
+      --bb-primary-15: rgba(254, 78, 24, 0.15);
+      --bb-cream-6: rgba(232, 228, 221, 0.06);
+      --bb-cream-10: rgba(232, 228, 221, 0.10);
+      --bb-cream-15: rgba(232, 228, 221, 0.15);
+
       --bb-font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
       --bb-font-mono: 'Fragment Mono', 'JetBrains Mono', monospace;
       --bb-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
@@ -50,6 +63,13 @@
       --bb-radius-full: 100vw;
       --bb-site-padding: 32px;
       --bb-max-width: 1440px;
+
+      --bb-shadow-sm: 0 1px 2px rgba(13,30,36,0.04);
+      --bb-shadow-md: 0 4px 12px rgba(13,30,36,0.06);
+      --bb-shadow-lg: 0 12px 32px rgba(13,30,36,0.10);
+      --bb-shadow-card-warm: 0 1px 3px rgba(13,30,36,0.04), 0 0 0 1px rgba(13,30,36,0.03);
+      --bb-shadow-card-dark: inset 0 1px 0 rgba(232,228,221,0.06), 0 4px 24px rgba(0,0,0,0.3);
+      --bb-shadow-glow-primary: 0 0 40px rgba(254,78,24,0.15);
     }
 
     /* ================================================
@@ -62,107 +82,61 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
-      background: var(--bb-surface-dark);
-      color: var(--bb-text-inverted);
+      background: var(--bb-cream-light);
+      color: var(--bb-text-primary);
       overflow-x: hidden;
     }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
 
     /* ================================================
        TYPOGRAPHY
        ================================================ */
-    .bb-display {
-      font-size: clamp(48px, 8vw, 120px);
-      font-weight: 500;
-      line-height: 0.93;
-      letter-spacing: -0.067em;
-    }
-    .bb-heading {
-      font-size: clamp(36px, 6vw, 96px);
-      font-weight: 500;
-      line-height: 0.92;
-      letter-spacing: -0.031em;
-    }
-    .bb-subheading {
-      font-size: clamp(24px, 3vw, 48px);
-      font-weight: 600;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-    }
-    .bb-title {
-      font-size: clamp(20px, 2vw, 32px);
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
-    .bb-body {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.6;
-      letter-spacing: -0.01em;
-    }
-    .bb-body-sm {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.5;
-      color: var(--bb-text-subtle);
-    }
-    .bb-label {
-      font-family: var(--bb-font-mono);
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--bb-text-subtle);
-    }
-    .bb-label-lg {
-      font-family: var(--bb-font-mono);
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: var(--bb-text-subtle);
-    }
-    .bb-mono {
-      font-family: var(--bb-font-mono);
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    .bb-display { font-size: clamp(48px, 8vw, 120px); font-weight: 500; line-height: 0.93; letter-spacing: -0.067em; }
+    .bb-heading { font-size: clamp(36px, 6vw, 96px); font-weight: 500; line-height: 0.92; letter-spacing: -0.031em; }
+    .bb-subheading { font-size: clamp(24px, 3vw, 48px); font-weight: 600; line-height: 1.0; letter-spacing: -0.02em; }
+    .bb-title { font-size: clamp(20px, 2vw, 32px); font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; }
+    .bb-body { font-size: 16px; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; }
+    .bb-body-sm { font-size: 14px; font-weight: 400; line-height: 1.5; }
+    .bb-label { font-family: var(--bb-font-mono); font-size: 10px; font-weight: 300; letter-spacing: 0.05em; text-transform: uppercase; }
+    .bb-label-lg { font-family: var(--bb-font-mono); font-size: 12px; font-weight: 400; letter-spacing: 0.03em; text-transform: uppercase; }
+    .bb-mono { font-family: var(--bb-font-mono); font-size: 14px; line-height: 1.6; }
 
     /* ================================================
        LAYOUT
        ================================================ */
-    .section {
-      padding: 120px var(--bb-site-padding);
-    }
-    .section-inner {
-      max-width: var(--bb-max-width);
-      margin: 0 auto;
-    }
-    .section-header {
-      margin-bottom: 80px;
-    }
-    .section-header .bb-label {
-      display: block;
-      margin-bottom: 24px;
-    }
+    .section { padding: 120px var(--bb-site-padding); }
+    .section-inner { max-width: var(--bb-max-width); margin: 0 auto; }
+    .section-header { margin-bottom: 80px; }
+    .section-header .bb-label { display: block; margin-bottom: 24px; }
+
+    /* ================================================
+       SURFACE THEMES
+       ================================================ */
+    .bg-cream { background: var(--bb-cream-light); color: var(--bb-text-primary); }
+    .bg-cream-deep { background: var(--bb-cream); color: var(--bb-text-primary); }
+    .bg-white { background: var(--bb-cream-lightest); color: var(--bb-text-primary); }
+    .bg-dark { background: var(--bb-dark); color: var(--bb-text-on-dark); }
+    .bg-dark-2 { background: var(--bb-dark-2); color: var(--bb-text-on-dark); }
+
+    .bg-cream .bb-label, .bg-cream-deep .bb-label, .bg-white .bb-label { color: var(--bb-text-muted); }
+    .bg-cream .bb-body-sm, .bg-cream-deep .bb-body-sm { color: var(--bb-text-muted); }
+    .bg-dark .bb-label, .bg-dark-2 .bb-label { color: var(--bb-text-on-dark-subtle); }
+    .bg-dark .bb-body-sm, .bg-dark-2 .bb-body-sm { color: var(--bb-text-on-dark-muted); }
 
     /* ================================================
        GRID SYSTEM
        ================================================ */
-    .bb-grid {
-      display: grid;
-      gap: 1px;
-      background: var(--bb-border-dark);
-      width: 100%;
-    }
-    .bb-grid > * {
-      background: var(--bb-surface-dark);
-      position: relative;
-    }
-    .bb-grid--light { background: var(--bb-border-light); }
-    .bb-grid--light > * { background: var(--bb-bg-1); }
+    .bb-grid { display: grid; gap: 1px; width: 100%; }
+    .bb-grid > * { position: relative; }
+
+    /* Dark grid (default) */
+    .bb-grid--dark { background: var(--bb-border-cool-strong); }
+    .bb-grid--dark > * { background: var(--bb-dark); }
+
+    /* Warm grid */
+    .bb-grid--warm { background: var(--bb-border-warm); }
+    .bb-grid--warm > * { background: var(--bb-cream-light); }
+
     .bb-grid-5 { grid-template-columns: 1.7fr 1fr 1fr 1fr 1.7fr; }
     .bb-grid-4 { grid-template-columns: repeat(4, 1fr); }
     .bb-grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -173,65 +147,41 @@
 
     .bb-dots { position: relative; }
     .bb-dots::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(var(--bb-white-15) 0.5px, transparent 0px);
-      background-size: 17px 17px;
-      background-position: -8.5px -8.5px;
-      pointer-events: none;
-      z-index: 1;
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(var(--bb-cream-15) 0.5px, transparent 0px);
+      background-size: 17px 17px; background-position: -8.5px -8.5px;
+      pointer-events: none; z-index: 1;
     }
-    .bb-dots--light::after {
-      background-image: radial-gradient(rgba(31, 25, 21, 0.08) 0.5px, transparent 0px);
+    .bb-dots--warm::after {
+      background-image: radial-gradient(rgba(13, 30, 36, 0.06) 0.5px, transparent 0px);
     }
 
     .bb-grid-cell {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 32px;
-      min-height: 200px;
-      position: relative;
+      padding: 24px; display: flex; flex-direction: column;
+      justify-content: space-between; gap: 32px; min-height: 200px; position: relative;
     }
     .bb-grid-figure {
-      padding: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      min-height: 300px;
+      padding: 48px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; min-height: 300px;
     }
     .bb-fig-label {
-      font-family: var(--bb-font-mono);
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--bb-text-subtle);
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      z-index: 2;
+      font-family: var(--bb-font-mono); font-size: 10px; font-weight: 300;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      position: absolute; top: 16px; left: 16px; z-index: 2;
     }
+    .bb-grid--dark .bb-fig-label { color: var(--bb-text-on-dark-subtle); }
+    .bb-grid--warm .bb-fig-label { color: var(--bb-text-muted); }
+
     .bb-grid-arrow {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 16px;
-      height: 16px;
-      color: var(--bb-text-subtle);
-      z-index: 2;
+      position: absolute; top: 16px; right: 16px; width: 16px; height: 16px; z-index: 2;
       transition: color 0.15s var(--bb-ease-standard);
     }
-    .bb-grid-cell:hover .bb-grid-arrow { color: var(--bb-text-inverted); }
+    .bb-grid--dark .bb-grid-arrow { color: var(--bb-text-on-dark-subtle); }
+    .bb-grid--warm .bb-grid-arrow { color: var(--bb-text-muted); }
+    .bb-grid-cell:hover .bb-grid-arrow { color: var(--bb-primary); }
     .bb-grid-empty { min-height: 48px; }
 
-    @media (max-width: 1024px) {
-      .bb-grid-5 { grid-template-columns: repeat(3, 1fr); }
-    }
+    @media (max-width: 1024px) { .bb-grid-5 { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 768px) {
       .bb-grid-5, .bb-grid-4, .bb-grid-3 { grid-template-columns: repeat(2, 1fr); }
       .bb-col-span-3 { grid-column: span 2; }
@@ -247,216 +197,77 @@
        COMPONENTS
        ================================================ */
     .bb-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 28px;
-      font-family: var(--bb-font-sans);
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1;
-      letter-spacing: -0.01em;
-      border: none;
-      border-radius: var(--bb-radius-full);
-      cursor: pointer;
-      transition: all 0.3s var(--bb-ease-bounce);
-      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; font-family: var(--bb-font-sans);
+      font-size: 14px; font-weight: 500; line-height: 1;
+      letter-spacing: -0.01em; border: none;
+      border-radius: var(--bb-radius-full); cursor: pointer;
+      transition: all 0.3s var(--bb-ease-bounce); text-decoration: none;
     }
-    .bb-btn-primary { background: var(--bb-accent); color: var(--bb-dark); }
-    .bb-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(212, 253, 128, 0.15); }
-    .bb-btn-secondary { background: var(--bb-white-10); color: var(--bb-text-inverted); border: 1px solid var(--bb-border-dark-strong); }
-    .bb-btn-secondary:hover { background: var(--bb-white-15); transform: translateY(-1px); }
-    .bb-btn-outline { background: transparent; color: var(--bb-text-primary); border: 1px solid var(--bb-border-light); }
-    .bb-btn-outline:hover { background: var(--bb-bg-2); transform: translateY(-1px); }
+    .bb-btn-primary { background: var(--bb-primary); color: var(--bb-text-on-primary); }
+    .bb-btn-primary:hover { transform: translateY(-1px); box-shadow: var(--bb-shadow-glow-primary); }
+    .bb-btn-secondary { background: var(--bb-secondary); color: var(--bb-text-on-dark); }
+    .bb-btn-secondary:hover { background: var(--bb-secondary-light); transform: translateY(-1px); }
+    .bb-btn-ghost { background: transparent; color: var(--bb-text-primary); border: 1px solid var(--bb-border-warm-strong); }
+    .bb-btn-ghost:hover { background: var(--bb-cream); transform: translateY(-1px); }
+    .bb-btn-ghost-dark { background: transparent; color: var(--bb-text-on-dark); border: 1px solid var(--bb-border-cool-strong); }
+    .bb-btn-ghost-dark:hover { background: var(--bb-cream-10); transform: translateY(-1px); }
     .bb-btn-sm { padding: 8px 20px; font-size: 13px; }
     .bb-btn-lg { padding: 16px 36px; font-size: 16px; }
 
     .bb-card {
-      background: var(--bb-bg-1);
-      border: 1px solid var(--bb-border-light);
-      border-radius: 16px;
-      padding: 24px;
+      background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm);
+      border-radius: 16px; padding: 24px;
       transition: all 0.3s var(--bb-ease-bounce);
     }
-    .bb-card:hover { box-shadow: 0 4px 12px rgba(31,25,21,0.08); transform: translateY(-2px); }
+    .bb-card:hover { box-shadow: var(--bb-shadow-md); transform: translateY(-2px); }
     .bb-card-dark {
-      background: var(--bb-surface-dark-card);
-      border: 1px solid var(--bb-border-dark-strong);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.3);
+      background: var(--bb-dark-card); border: 1px solid var(--bb-border-cool-strong);
+      border-radius: 16px; box-shadow: var(--bb-shadow-card-dark);
     }
-    .bb-card-dark:hover { border-color: var(--bb-white-15); }
+    .bb-card-dark:hover { border-color: var(--bb-border-cool-hover, rgba(232,228,221,0.22)); }
 
     .bb-input {
-      width: 100%;
-      padding: 12px 16px;
-      font-family: var(--bb-font-sans);
-      font-size: 14px;
-      color: var(--bb-text-primary);
-      background: var(--bb-light);
-      border: 1px solid var(--bb-border-light);
-      border-radius: 12px;
-      outline: none;
+      width: 100%; padding: 12px 16px; font-family: var(--bb-font-sans);
+      font-size: 14px; color: var(--bb-text-primary);
+      background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm);
+      border-radius: 12px; outline: none;
       transition: all 0.15s var(--bb-ease-standard);
     }
     .bb-input::placeholder { font-family: var(--bb-font-mono); color: var(--bb-text-subtle); font-size: 13px; }
-    .bb-input:focus { border-color: var(--bb-dark); box-shadow: 0 0 0 3px rgba(31,25,21,0.08); }
-    .bb-input-dark { background: var(--bb-surface-dark-2); border-color: var(--bb-border-dark-strong); color: var(--bb-text-inverted); }
-    .bb-input-dark:focus { border-color: var(--bb-accent); box-shadow: 0 0 0 3px rgba(212,253,128,0.1); }
+    .bb-input:focus { border-color: var(--bb-primary); box-shadow: 0 0 0 3px var(--bb-primary-10); }
+    .bb-input-dark {
+      background: var(--bb-dark-elevated); border-color: var(--bb-border-cool-strong);
+      color: var(--bb-text-on-dark);
+    }
+    .bb-input-dark::placeholder { color: var(--bb-text-on-dark-subtle); }
+    .bb-input-dark:focus { border-color: var(--bb-primary); box-shadow: 0 0 0 3px var(--bb-primary-10); }
 
     .bb-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      font-family: var(--bb-font-mono);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      border-radius: var(--bb-radius-full);
-      line-height: 1.4;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; font-family: var(--bb-font-mono);
+      font-size: 11px; font-weight: 400; letter-spacing: 0.02em;
+      border-radius: var(--bb-radius-full); line-height: 1.4;
     }
-    .bb-badge-green { background: rgba(212,253,128,0.12); color: var(--bb-accent); }
-    .bb-badge-amber { background: rgba(250,114,90,0.12); color: var(--bb-coral); }
-    .bb-badge-red { background: rgba(250,65,73,0.12); color: var(--bb-red); }
-    .bb-badge-neutral { background: var(--bb-white-10); color: var(--bb-text-subtle); }
+    .bb-badge-primary { background: var(--bb-primary-10); color: var(--bb-primary); }
+    .bb-badge-secondary { background: rgba(52,71,78,0.10); color: var(--bb-secondary); }
+    .bb-badge-neutral { background: rgba(107,114,128,0.10); color: var(--bb-neutral); }
 
     .bb-tag {
-      display: inline-flex;
-      padding: 6px 14px;
-      font-family: var(--bb-font-mono);
-      font-size: 12px;
-      color: var(--bb-text-subtle);
-      border: 1px solid var(--bb-border-dark-strong);
+      display: inline-flex; padding: 6px 14px; font-family: var(--bb-font-mono);
+      font-size: 12px; letter-spacing: 0.02em; text-transform: uppercase;
       border-radius: var(--bb-radius-full);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
     }
+    .bb-tag-warm { color: var(--bb-text-secondary); border: 1px solid var(--bb-border-warm-strong); }
+    .bb-tag-cool { color: var(--bb-text-on-dark-muted); border: 1px solid var(--bb-border-cool-strong); }
 
     .bb-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--bb-font-mono);
-      font-size: 13px;
-      color: var(--bb-text-inverted);
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--bb-font-mono); font-size: 13px;
       transition: color 0.15s var(--bb-ease-standard);
     }
-    .bb-link:hover { color: var(--bb-accent); }
+    .bb-link:hover { color: var(--bb-primary); }
     .bb-link svg { width: 14px; height: 14px; }
-
-    /* ================================================
-       HERO
-       ================================================ */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 160px var(--bb-site-padding) 120px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-inner {
-      max-width: var(--bb-max-width);
-      margin: 0 auto;
-      width: 100%;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 40px;
-    }
-    .hero-title { max-width: 900px; margin-bottom: 40px; }
-    .hero-description {
-      max-width: 520px;
-      margin-bottom: 48px;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--bb-text-subtle);
-    }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(212,253,128,0.06) 0%, transparent 70%);
-      top: 10%;
-      right: -10%;
-      pointer-events: none;
-    }
-
-    /* ================================================
-       SWATCHES
-       ================================================ */
-    .swatch-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-    .swatch {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      transition: transform 0.2s var(--bb-ease-bounce);
-    }
-    .swatch:hover { transform: scale(1.05); }
-    .swatch-name { font-family: var(--bb-font-mono); font-size: 10px; color: var(--bb-text-subtle); margin-top: 8px; text-align: center; }
-    .swatch-hex { font-family: var(--bb-font-mono); font-size: 9px; color: var(--bb-text-subtle); text-align: center; opacity: 0.7; }
-    .swatch--bordered { border: 1px solid var(--bb-border-dark-strong); }
-
-    /* ================================================
-       SPACING & RADIUS
-       ================================================ */
-    .spacing-bar { height: 8px; background: var(--bb-accent); border-radius: 4px; opacity: 0.6; margin-bottom: 8px; }
-    .radius-demo {
-      width: 80px; height: 80px;
-      background: var(--bb-white-10);
-      border: 1px solid var(--bb-border-dark-strong);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--bb-font-mono); font-size: 11px; color: var(--bb-text-subtle);
-    }
-
-    /* ================================================
-       ANIMATIONS
-       ================================================ */
-    .bb-fade-in { opacity: 0; transform: translateY(30px); }
-    .bb-fade-in.is-visible {
-      opacity: 1; transform: translateY(0);
-      transition: opacity 0.8s var(--bb-ease-bounce), transform 0.8s var(--bb-ease-bounce);
-    }
-
-    /* ================================================
-       SECTIONS
-       ================================================ */
-    .bg-dark { background: var(--bb-surface-dark); color: var(--bb-text-inverted); }
-    .bg-dark-2 { background: var(--bb-surface-dark-2); color: var(--bb-text-inverted); }
-    .bg-warm { background: var(--bb-bg-1); color: var(--bb-text-primary); }
-
-    /* ================================================
-       DEMO HELPERS
-       ================================================ */
-    .demo-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
-    .demo-label { font-family: var(--bb-font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bb-text-subtle); margin-bottom: 12px; }
-    .demo-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .illustration {
-      width: 100%; max-width: 280px; aspect-ratio: 1; border-radius: 12px;
-      background: linear-gradient(135deg, rgba(212,253,128,0.08) 0%, rgba(212,253,128,0.02) 100%);
-      border: 1px solid var(--bb-border-dark-strong);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 2;
-    }
-    .illustration-inner { width: 60%; height: 60%; border-radius: 8px; background: var(--bb-white-6); border: 1px solid var(--bb-border-dark); }
-
-    /* ================================================
-       EASING DEMO
-       ================================================ */
-    .easing-track { width: 100%; height: 4px; background: var(--bb-white-6); border-radius: 2px; position: relative; margin: 12px 0 24px; }
-    .easing-dot {
-      width: 12px; height: 12px; border-radius: 50%; background: var(--bb-accent);
-      position: absolute; top: -4px; left: 0; transition: left 1s;
-    }
-    .easing-track:hover .easing-dot { left: calc(100% - 12px); }
-    .easing-dot--standard { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
-    .easing-dot--bounce { transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
-    .easing-dot--spring { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
 
     /* ================================================
        NAV
@@ -465,15 +276,84 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 20px var(--bb-site-padding);
       display: flex; justify-content: space-between; align-items: center;
-      backdrop-filter: blur(12px); background: rgba(13, 13, 13, 0.8);
-      border-bottom: 1px solid var(--bb-border-dark);
+      backdrop-filter: blur(16px); background: rgba(242, 239, 233, 0.85);
+      border-bottom: 1px solid var(--bb-border-warm);
     }
-    .nav-logo { font-family: var(--bb-font-mono); font-size: 13px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bb-text-subtle); }
-    .nav-logo span { color: var(--bb-accent); }
+    .nav-logo { font-family: var(--bb-font-mono); font-size: 13px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bb-text-muted); }
+    .nav-logo span { color: var(--bb-primary); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { font-family: var(--bb-font-mono); font-size: 11px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--bb-text-subtle); transition: color 0.15s; }
-    .nav-links a:hover { color: var(--bb-text-inverted); }
+    .nav-links a { font-family: var(--bb-font-mono); font-size: 11px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--bb-text-muted); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--bb-text-primary); }
     @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ================================================
+       HERO
+       ================================================ */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 160px var(--bb-site-padding) 120px; position: relative; overflow: hidden;
+    }
+    .hero-inner { max-width: var(--bb-max-width); margin: 0 auto; width: 100%; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+    .hero-title { max-width: 900px; margin-bottom: 40px; }
+    .hero-description { max-width: 520px; margin-bottom: 48px; font-size: 16px; line-height: 1.6; color: var(--bb-text-muted); }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(254,78,24,0.05) 0%, transparent 70%);
+      top: 10%; right: -10%; pointer-events: none;
+    }
+
+    /* ================================================
+       SWATCHES
+       ================================================ */
+    .swatch-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+    .swatch { width: 80px; height: 80px; border-radius: 12px; transition: transform 0.2s var(--bb-ease-bounce); }
+    .swatch:hover { transform: scale(1.05); }
+    .swatch-name { font-family: var(--bb-font-mono); font-size: 10px; margin-top: 8px; text-align: center; }
+    .swatch-hex { font-family: var(--bb-font-mono); font-size: 9px; text-align: center; opacity: 0.7; }
+    .swatch--bordered { border: 1px solid var(--bb-border-warm); }
+    .swatch--bordered-dark { border: 1px solid var(--bb-border-cool-strong); }
+
+    /* ================================================
+       SPACING & RADIUS
+       ================================================ */
+    .spacing-bar { height: 8px; background: var(--bb-primary); border-radius: 4px; opacity: 0.5; }
+    .radius-demo {
+      width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;
+      font-family: var(--bb-font-mono); font-size: 11px;
+    }
+
+    /* ================================================
+       ANIMATION CLASSES
+       ================================================ */
+    .bb-fade-in { opacity: 0; transform: translateY(30px); }
+    .bb-fade-in.is-visible { opacity: 1; transform: translateY(0); transition: opacity 0.8s var(--bb-ease-bounce), transform 0.8s var(--bb-ease-bounce); }
+
+    /* ================================================
+       DEMO HELPERS
+       ================================================ */
+    .demo-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
+    .demo-label { font-family: var(--bb-font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
+    .demo-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+
+    /* ================================================
+       EASING DEMO
+       ================================================ */
+    .easing-track { width: 100%; height: 4px; border-radius: 2px; position: relative; margin: 12px 0 24px; }
+    .easing-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bb-primary); position: absolute; top: -4px; left: 0; transition: left 1s; }
+    .easing-track:hover .easing-dot { left: calc(100% - 12px); }
+    .easing-dot--standard { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+    .easing-dot--bounce { transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
+    .easing-dot--spring { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+    /* ================================================
+       ISOMETRIC SVG STYLING
+       ================================================ */
+    .iso-svg { width: 100%; max-width: 320px; height: auto; position: relative; z-index: 2; }
+    .iso-svg .iso-line { fill: none; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+    .iso-svg .iso-fill { opacity: 0.15; }
+    .iso-svg .iso-accent { opacity: 0.8; }
   </style>
 </head>
 <body>
@@ -491,15 +371,17 @@
     </ul>
   </nav>
 
-  <!-- 01 — HERO -->
-  <section class="hero bg-dark">
+  <!-- ================================================
+       01 — HERO (Cream)
+       ================================================ -->
+  <section class="hero bg-cream">
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">
-        <span class="bb-tag">Design System v3</span>
-        <span class="bb-badge bb-badge-green">New</span>
+        <span class="bb-tag bb-tag-warm">Design System v3</span>
+        <span class="bb-badge bb-badge-primary">New</span>
       </div>
-      <h1 class="bb-display hero-title bb-reveal" style="color: var(--bb-text-inverted);">
+      <h1 class="bb-display hero-title bb-reveal" style="color: var(--bb-text-primary);">
         Build with<br>precision.
       </h1>
       <p class="hero-description bb-fade-in">
@@ -507,56 +389,58 @@
       </p>
       <div class="hero-actions bb-fade-in">
         <a href="#grid" class="bb-btn bb-btn-primary">Explore the grid</a>
-        <a href="#components" class="bb-btn bb-btn-secondary">View components</a>
+        <a href="#components" class="bb-btn bb-btn-ghost">View components</a>
       </div>
     </div>
   </section>
 
-  <!-- 02 — TYPOGRAPHY -->
-  <section id="typography" class="section bg-dark-2">
+  <!-- ================================================
+       02 — TYPOGRAPHY (Dark)
+       ================================================ -->
+  <section id="typography" class="section bg-dark">
     <div class="section-inner">
       <div class="section-header">
         <span class="bb-label">02 / Typography</span>
-        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-inverted);">Type system</h2>
+        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-on-dark);">Type system</h2>
       </div>
 
       <div style="margin-bottom: 80px;">
-        <span class="bb-label" style="display:block; margin-bottom:16px;">Display — 120px / -0.067em / 0.93</span>
-        <p class="bb-display" style="color: var(--bb-text-inverted); margin-bottom: 48px;">Aa Bb Cc</p>
+        <span class="bb-label" style="display:block; margin-bottom:16px; color: var(--bb-text-on-dark-subtle);">Display — 120px / -0.067em / 0.93</span>
+        <p class="bb-display" style="color: var(--bb-text-on-dark); margin-bottom: 48px;">Aa Bb Cc</p>
 
-        <span class="bb-label" style="display:block; margin-bottom:16px;">Heading — 96px / -0.031em / 0.92</span>
-        <p class="bb-heading" style="color: var(--bb-text-inverted); margin-bottom: 48px;">Headlines</p>
+        <span class="bb-label" style="display:block; margin-bottom:16px; color: var(--bb-text-on-dark-subtle);">Heading — 96px / -0.031em / 0.92</span>
+        <p class="bb-heading" style="color: var(--bb-text-on-dark); margin-bottom: 48px;">Headlines</p>
 
-        <span class="bb-label" style="display:block; margin-bottom:16px;">Subheading — 48px / -0.02em / 1.0</span>
-        <p class="bb-subheading" style="color: var(--bb-text-inverted); margin-bottom: 48px;">Feature titles</p>
+        <span class="bb-label" style="display:block; margin-bottom:16px; color: var(--bb-text-on-dark-subtle);">Subheading — 48px / -0.02em / 1.0</span>
+        <p class="bb-subheading" style="color: var(--bb-text-on-dark); margin-bottom: 48px;">Feature titles</p>
 
-        <span class="bb-label" style="display:block; margin-bottom:16px;">Title — 32px / -0.01em / 1.1</span>
-        <p class="bb-title" style="color: var(--bb-text-inverted); margin-bottom: 48px;">Card headings and smaller sections</p>
+        <span class="bb-label" style="display:block; margin-bottom:16px; color: var(--bb-text-on-dark-subtle);">Title — 32px / -0.01em / 1.1</span>
+        <p class="bb-title" style="color: var(--bb-text-on-dark); margin-bottom: 48px;">Card headings and smaller sections</p>
 
-        <span class="bb-label" style="display:block; margin-bottom:16px;">Body — 16px / -0.01em / 1.6</span>
-        <p class="bb-body" style="color: var(--bb-text-inverted); max-width: 600px; margin-bottom: 48px;">
-          Body text uses Geist at 16px with a comfortable 1.6 line height. Designed for readability in both light and dark contexts, with subtle negative tracking.
+        <span class="bb-label" style="display:block; margin-bottom:16px; color: var(--bb-text-on-dark-subtle);">Body — 16px / 1.6</span>
+        <p class="bb-body" style="color: var(--bb-text-on-dark); max-width: 600px; margin-bottom: 48px;">
+          Body text uses Geist at 16px with a comfortable 1.6 line height. Designed for readability in both warm and cool contexts.
         </p>
 
-        <span class="bb-label" style="display:block; margin-bottom:16px;">Label — Fragment Mono / 10px / uppercase</span>
-        <p class="bb-label-lg" style="margin-bottom: 12px;">FIG_01 — Section labels and captions</p>
-        <p class="bb-mono" style="color: var(--bb-text-subtle);">monospace for code, tokens, and technical content</p>
+        <span class="bb-label" style="display:block; margin-bottom:16px; color: var(--bb-text-on-dark-subtle);">Label — Fragment Mono / 10px / uppercase</span>
+        <p class="bb-label-lg" style="color: var(--bb-text-on-dark-muted); margin-bottom: 12px;">FIG_01 — Section labels and captions</p>
+        <p class="bb-mono" style="color: var(--bb-text-on-dark-subtle);">monospace for code, tokens, and technical content</p>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
-        <div class="bb-card-dark" style="padding: 32px; border-radius: 16px;">
-          <span class="bb-label" style="display:block; margin-bottom: 20px;">Geist — Sans-serif</span>
-          <p style="font-size: 48px; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 8px;">Light 300</p>
-          <p style="font-size: 48px; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 8px;">Regular 400</p>
-          <p style="font-size: 48px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px;">Medium 500</p>
-          <p style="font-size: 48px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px;">SemiBold 600</p>
-          <p style="font-size: 48px; font-weight: 700; letter-spacing: -0.02em;">Bold 700</p>
+        <div class="bb-card-dark" style="padding: 32px;">
+          <span class="bb-label" style="display:block; margin-bottom: 20px; color: var(--bb-text-on-dark-subtle);">Geist — Sans-serif</span>
+          <p style="font-size: 48px; font-weight: 300; letter-spacing: -0.02em; color: var(--bb-text-on-dark); margin-bottom: 8px;">Light 300</p>
+          <p style="font-size: 48px; font-weight: 400; letter-spacing: -0.02em; color: var(--bb-text-on-dark); margin-bottom: 8px;">Regular 400</p>
+          <p style="font-size: 48px; font-weight: 500; letter-spacing: -0.02em; color: var(--bb-text-on-dark); margin-bottom: 8px;">Medium 500</p>
+          <p style="font-size: 48px; font-weight: 600; letter-spacing: -0.02em; color: var(--bb-text-on-dark); margin-bottom: 8px;">SemiBold 600</p>
+          <p style="font-size: 48px; font-weight: 700; letter-spacing: -0.02em; color: var(--bb-text-on-dark);">Bold 700</p>
         </div>
-        <div class="bb-card-dark" style="padding: 32px; border-radius: 16px;">
-          <span class="bb-label" style="display:block; margin-bottom: 20px;">Fragment Mono — Monospace</span>
-          <p style="font-family: var(--bb-font-mono); font-size: 36px; font-weight: 300; margin-bottom: 16px;">Light 300</p>
-          <p style="font-family: var(--bb-font-mono); font-size: 36px; font-weight: 400; margin-bottom: 32px;">Regular 400</p>
-          <p style="font-family: var(--bb-font-mono); font-size: 14px; line-height: 1.8; color: var(--bb-text-subtle);">
+        <div class="bb-card-dark" style="padding: 32px;">
+          <span class="bb-label" style="display:block; margin-bottom: 20px; color: var(--bb-text-on-dark-subtle);">Fragment Mono — Monospace</span>
+          <p style="font-family: var(--bb-font-mono); font-size: 36px; font-weight: 300; color: var(--bb-text-on-dark); margin-bottom: 16px;">Light 300</p>
+          <p style="font-family: var(--bb-font-mono); font-size: 36px; font-weight: 400; color: var(--bb-text-on-dark); margin-bottom: 32px;">Regular 400</p>
+          <p style="font-family: var(--bb-font-mono); font-size: 14px; line-height: 1.8; color: var(--bb-text-on-dark-subtle);">
             ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()
           </p>
         </div>
@@ -564,321 +448,428 @@
     </div>
   </section>
 
-  <!-- 03 — COLORS -->
-  <section id="colors" class="section bg-dark">
+  <!-- ================================================
+       03 — COLORS (Cream)
+       ================================================ -->
+  <section id="colors" class="section bg-cream">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label">03 / Color</span>
-        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-inverted);">Warm palette</h2>
+        <span class="bb-label" style="color: var(--bb-text-muted);">03 / Color</span>
+        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-primary);">Warm &amp; cool</h2>
       </div>
 
-      <span class="demo-label">Foundation</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Foundation</span>
       <div class="swatch-row">
-        <div><div class="swatch" style="background: #1f1915;"></div><p class="swatch-name">Dark</p><p class="swatch-hex">#1f1915</p></div>
-        <div><div class="swatch swatch--bordered" style="background: #fffdf6;"></div><p class="swatch-name">Light</p><p class="swatch-hex">#fffdf6</p></div>
-        <div><div class="swatch" style="background: #d4fd80;"></div><p class="swatch-name">Accent</p><p class="swatch-hex">#d4fd80</p></div>
-        <div><div class="swatch" style="background: #fa4149;"></div><p class="swatch-name">Red</p><p class="swatch-hex">#fa4149</p></div>
-        <div><div class="swatch" style="background: #fa725a;"></div><p class="swatch-name">Coral</p><p class="swatch-hex">#fa725a</p></div>
+        <div><div class="swatch" style="background: #FE4E18;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Primary</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#FE4E18</p></div>
+        <div><div class="swatch" style="background: #34474E;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Secondary</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#34474E</p></div>
+        <div><div class="swatch swatch--bordered" style="background: #E8E4DD;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Cream</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#E8E4DD</p></div>
+        <div><div class="swatch swatch--bordered" style="background: #6B7280;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Neutral</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#6B7280</p></div>
+        <div><div class="swatch" style="background: #0D1E24;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Dark</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#0D1E24</p></div>
       </div>
 
-      <span class="demo-label">Warm Backgrounds</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Warm Surfaces</span>
       <div class="swatch-row">
-        <div><div class="swatch swatch--bordered" style="background: #f7f5f1;"></div><p class="swatch-name">BG-1</p><p class="swatch-hex">#f7f5f1</p></div>
-        <div><div class="swatch swatch--bordered" style="background: #f2efe9;"></div><p class="swatch-name">BG-2</p><p class="swatch-hex">#f2efe9</p></div>
-        <div><div class="swatch swatch--bordered" style="background: #e6e3dd;"></div><p class="swatch-name">BG-3</p><p class="swatch-hex">#e6e3dd</p></div>
+        <div><div class="swatch swatch--bordered" style="background: #FFFDF6;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Lightest</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#FFFDF6</p></div>
+        <div><div class="swatch swatch--bordered" style="background: #F7F5F1;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Lighter</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#F7F5F1</p></div>
+        <div><div class="swatch swatch--bordered" style="background: #F2EFE9;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Light</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#F2EFE9</p></div>
+        <div><div class="swatch swatch--bordered" style="background: #E8E4DD;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Base</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#E8E4DD</p></div>
       </div>
 
-      <span class="demo-label">Dark Surfaces</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Cool Dark Surfaces</span>
       <div class="swatch-row">
-        <div><div class="swatch swatch--bordered" style="background: #0d0d0d;"></div><p class="swatch-name">Surface</p><p class="swatch-hex">#0d0d0d</p></div>
-        <div><div class="swatch swatch--bordered" style="background: #141414;"></div><p class="swatch-name">Surface-2</p><p class="swatch-hex">#141414</p></div>
-        <div><div class="swatch swatch--bordered" style="background: #1a1a1a;"></div><p class="swatch-name">Surface-3</p><p class="swatch-hex">#1a1a1a</p></div>
-        <div><div class="swatch swatch--bordered" style="background: #111111;"></div><p class="swatch-name">Card</p><p class="swatch-hex">#111111</p></div>
+        <div><div class="swatch" style="background: #0D1E24;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Dark</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#0D1E24</p></div>
+        <div><div class="swatch" style="background: #132A32;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Dark-2</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#132A32</p></div>
+        <div><div class="swatch" style="background: #1A3540;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Dark-3</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#1A3540</p></div>
+        <div><div class="swatch" style="background: #0F2229;"></div><p class="swatch-name" style="color: var(--bb-text-muted);">Card</p><p class="swatch-hex" style="color: var(--bb-text-subtle);">#0F2229</p></div>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px;">
-        <div style="background: var(--bb-bg-1); border-radius: 16px; padding: 40px;">
-          <span class="bb-label" style="color: var(--bb-text-muted); display: block; margin-bottom: 16px;">Light Surface</span>
+        <div style="background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm); border-radius: 16px; padding: 40px;">
+          <span class="bb-label" style="color: var(--bb-text-muted); display: block; margin-bottom: 16px;">Warm Surface</span>
           <p class="bb-title" style="color: var(--bb-text-primary); margin-bottom: 12px;">Warm and inviting</p>
-          <p class="bb-body-sm" style="color: var(--bb-text-muted);">Warm neutral backgrounds create a natural, organic feel.</p>
+          <p class="bb-body-sm" style="color: var(--bb-text-muted);">Cream backgrounds create a natural, organic feel — the default surface for most content.</p>
         </div>
-        <div style="background: var(--bb-surface-dark-card); border: 1px solid var(--bb-border-dark-strong); border-radius: 16px; padding: 40px;">
-          <span class="bb-label" style="display: block; margin-bottom: 16px;">Dark Surface</span>
-          <p class="bb-title" style="color: var(--bb-text-inverted); margin-bottom: 12px;">Sharp and precise</p>
-          <p class="bb-body-sm">Dark surfaces maintain warmth even in dark mode.</p>
+        <div style="background: var(--bb-dark-card); border: 1px solid var(--bb-border-cool-strong); border-radius: 16px; padding: 40px;">
+          <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-on-dark-subtle);">Cool Surface</span>
+          <p class="bb-title" style="color: var(--bb-text-on-dark); margin-bottom: 12px;">Sharp and precise</p>
+          <p class="bb-body-sm" style="color: var(--bb-text-on-dark-muted);">Cool dark teal for contrast sections, code blocks, and feature showcases.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 04 — GRID LAYOUT -->
-  <section id="grid" class="section bg-dark-2" style="padding-left: 0; padding-right: 0;">
+  <!-- ================================================
+       04 — GRID LAYOUT (Dark — showcase)
+       ================================================ -->
+  <section id="grid" class="section bg-dark" style="padding-left: 0; padding-right: 0;">
     <div style="padding: 0 var(--bb-site-padding); max-width: var(--bb-max-width); margin: 0 auto;">
       <div class="section-header">
-        <span class="bb-label">04 / Grid</span>
-        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-inverted);">Line grid</h2>
+        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">04 / Grid</span>
+        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-on-dark);">Line grid</h2>
       </div>
     </div>
 
     <div style="padding: 0 var(--bb-site-padding); max-width: 1600px; margin: 0 auto;">
-      <span class="demo-label" style="display: block; margin-bottom: 24px; padding-left: 4px;">5-Column Asymmetric — 1.7fr 1fr 1fr 1fr 1.7fr</span>
+      <span class="demo-label" style="display: block; margin-bottom: 24px; padding-left: 4px; color: var(--bb-text-on-dark-subtle);">5-Column Asymmetric — 1.7fr 1fr 1fr 1fr 1.7fr</span>
 
-      <div class="bb-grid bb-grid-5" style="border: 1px solid var(--bb-border-dark);">
+      <div class="bb-grid bb-grid--dark bb-grid-5" style="border: 1px solid var(--bb-border-cool-strong);">
+        <!-- Row 1 -->
         <div class="bb-grid-cell bb-col-span-2" style="min-height: 120px;">
           <div>
             <span class="bb-fig-label">Fig_01</span>
             <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
           </div>
           <div>
-            <h3 class="bb-subheading" style="color: var(--bb-text-inverted); font-size: 28px;">Build with precision</h3>
-            <p class="bb-body-sm" style="margin-top: 12px;">A design system crafted for developers and designers who value intentional choices.</p>
+            <h3 class="bb-subheading" style="color: var(--bb-text-on-dark); font-size: 28px;">Build with precision</h3>
+            <p class="bb-body-sm" style="margin-top: 12px; color: var(--bb-text-on-dark-muted);">A design system crafted for developers and designers who value intentional choices.</p>
           </div>
         </div>
         <div class="bb-grid-empty"></div>
         <div class="bb-grid-empty"></div>
+
+        <!-- Isometric: Stacked Cubes -->
         <div class="bb-grid-figure bb-dots bb-row-span-2" style="min-height: 400px;">
           <span class="bb-fig-label">Fig_02</span>
           <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
-          <div class="illustration"><div class="illustration-inner"></div></div>
+          <svg class="iso-svg" viewBox="0 0 260 300" fill="none">
+            <!-- Bottom cube -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M130 260 L220 210 L220 150 L130 200 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M130 260 L40 210 L40 150 L130 200 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M130 200 L220 150 L130 100 L40 150 Z"/>
+            <!-- Middle cube -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M130 200 L200 160 L200 110 L130 150 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M130 200 L60 160 L60 110 L130 150 Z"/>
+            <path class="iso-fill" fill="var(--bb-primary)" d="M130 150 L200 110 L130 70 L60 110 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M130 150 L200 110 L130 70 L60 110 Z"/>
+            <!-- Top small cube -->
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="1.5" d="M130 130 L170 108 L170 78 L130 100 Z"/>
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="1.5" d="M130 130 L90 108 L90 78 L130 100 Z"/>
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="1.5" d="M130 100 L170 78 L130 56 L90 78 Z"/>
+            <path class="iso-accent" fill="var(--bb-primary)" d="M130 100 L170 78 L130 56 L90 78 Z"/>
+          </svg>
         </div>
+
+        <!-- Row 2 -->
+        <!-- Isometric: Monitor -->
         <div class="bb-grid-figure bb-dots" style="min-height: 280px;">
           <span class="bb-fig-label">Fig_03</span>
-          <div class="illustration" style="max-width: 200px;"><div class="illustration-inner"></div></div>
+          <svg class="iso-svg" viewBox="0 0 240 260" fill="none" style="max-width: 220px;">
+            <!-- Monitor base -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M120 240 L170 213 L120 186 L70 213 Z"/>
+            <!-- Stand -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M120 186 L120 166"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M105 174 L135 174"/>
+            <!-- Screen body -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M30 166 L120 120 L210 166 L210 76 L120 30 L30 76 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M30 166 L120 120 L120 30"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M120 120 L210 166"/>
+            <!-- Screen content -->
+            <path class="iso-fill" fill="var(--bb-primary)" d="M50 148 L120 110 L120 50 L50 88 Z"/>
+            <!-- Screen highlights -->
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="0.8" d="M60 130 L100 108"/>
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="0.8" d="M60 120 L90 103"/>
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="0.8" d="M60 110 L80 98"/>
+            <!-- Right face -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M120 110 L190 148 L190 80 L120 42"/>
+          </svg>
         </div>
+
         <div class="bb-grid-cell bb-col-span-2">
           <div><span class="bb-fig-label">Fig_04</span></div>
           <div>
-            <h3 class="bb-title" style="color: var(--bb-text-inverted);">Warm tokens</h3>
-            <p class="bb-body-sm" style="margin-top: 8px;">Every color, space, and radius — defined as a portable CSS custom property.</p>
+            <h3 class="bb-title" style="color: var(--bb-text-on-dark);">Warm tokens</h3>
+            <p class="bb-body-sm" style="margin-top: 8px; color: var(--bb-text-on-dark-muted);">Every color, space, and radius — defined as a portable CSS custom property.</p>
           </div>
         </div>
         <div class="bb-grid-empty"></div>
+
+        <!-- Row 3 -->
         <div class="bb-grid-empty"></div>
+
         <div class="bb-grid-cell">
           <div>
             <span class="bb-fig-label">Fig_05</span>
             <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
           </div>
           <div>
-            <h3 class="bb-title" style="color: var(--bb-text-inverted);">Grid lines</h3>
-            <p class="bb-body-sm" style="margin-top: 8px;">CSS Grid with 1px gaps creates structural lines. No borders, no SVGs.</p>
+            <h3 class="bb-title" style="color: var(--bb-text-on-dark);">Grid lines</h3>
+            <p class="bb-body-sm" style="margin-top: 8px; color: var(--bb-text-on-dark-muted);">CSS Grid with 1px gaps. No borders, no SVGs — just the grid showing through.</p>
           </div>
         </div>
+
+        <!-- Isometric: Layered Cards -->
         <div class="bb-grid-figure bb-dots bb-col-span-2">
           <span class="bb-fig-label">Fig_06</span>
           <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
-          <div class="illustration" style="max-width: 240px;"><div class="illustration-inner"></div></div>
+          <svg class="iso-svg" viewBox="0 0 300 220" fill="none" style="max-width: 280px;">
+            <!-- Back card -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M80 180 L220 108 L220 48 L80 120 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M80 120 L220 48"/>
+            <!-- Middle card -->
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M60 170 L200 98 L200 38 L60 110 Z"/>
+            <path class="iso-fill" fill="var(--bb-secondary)" d="M60 170 L200 98 L200 38 L60 110 Z"/>
+            <path class="iso-line" stroke="var(--bb-text-on-dark-subtle)" d="M60 110 L200 38"/>
+            <!-- Front card -->
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="1.5" d="M40 160 L180 88 L180 28 L40 100 Z"/>
+            <path class="iso-fill" fill="var(--bb-primary)" d="M40 160 L180 88 L180 28 L40 100 Z"/>
+            <path class="iso-line" stroke="var(--bb-primary)" stroke-width="1.5" d="M40 100 L180 28"/>
+            <!-- Card content lines -->
+            <path stroke="var(--bb-dark)" stroke-width="1" opacity="0.4" d="M55 118 L130 78"/>
+            <path stroke="var(--bb-dark)" stroke-width="1" opacity="0.4" d="M55 128 L115 96"/>
+            <!-- Dot accent -->
+            <circle cx="60" cy="108" r="3" fill="var(--bb-dark)" opacity="0.5"/>
+          </svg>
         </div>
+
         <div class="bb-grid-cell">
           <div><span class="bb-fig-label">Fig_07</span></div>
           <div>
-            <h3 class="bb-title" style="color: var(--bb-text-inverted);">Dot overlay</h3>
-            <p class="bb-body-sm" style="margin-top: 8px;">Radial-gradient at 17px intervals creates the technical blueprint aesthetic.</p>
+            <h3 class="bb-title" style="color: var(--bb-text-on-dark);">Dot overlay</h3>
+            <p class="bb-body-sm" style="margin-top: 8px; color: var(--bb-text-on-dark-muted);">Radial-gradient at 17px intervals for the technical blueprint aesthetic.</p>
           </div>
         </div>
       </div>
 
-      <span class="demo-label" style="display: block; margin: 48px 0 24px; padding-left: 4px;">3-Column Equal</span>
-      <div class="bb-grid bb-grid-3" style="border: 1px solid var(--bb-border-dark);">
-        <div class="bb-grid-cell">
+      <!-- 3-Column with warm grid -->
+      <span class="demo-label" style="display: block; margin: 64px 0 24px; padding-left: 4px; color: var(--bb-text-on-dark-subtle);">3-Column Warm Grid</span>
+      <div class="bb-grid bb-grid--warm bb-grid-3" style="border: 1px solid var(--bb-border-warm);">
+        <div class="bb-grid-cell" style="min-height: 180px;">
           <span class="bb-fig-label">01</span>
-          <div><h3 class="bb-title" style="color: var(--bb-text-inverted); font-size: 20px;">Tokens</h3><p class="bb-body-sm" style="margin-top: 8px;">CSS custom properties as the portable foundation.</p></div>
+          <div>
+            <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px;">Tokens</h3>
+            <p class="bb-body-sm" style="color: var(--bb-text-muted); margin-top: 8px;">CSS custom properties as the portable foundation.</p>
+          </div>
         </div>
-        <div class="bb-grid-figure bb-dots">
-          <span class="bb-fig-label">02</span>
-          <div class="illustration" style="max-width: 160px;"><div class="illustration-inner"></div></div>
+        <!-- Isometric: Database cylinder -->
+        <div class="bb-grid-figure bb-dots--warm" style="min-height: 180px;">
+          <span class="bb-fig-label" style="color: var(--bb-text-muted);">02</span>
+          <svg class="iso-svg" viewBox="0 0 160 180" fill="none" style="max-width: 120px;">
+            <ellipse class="iso-line" stroke="var(--bb-secondary)" cx="80" cy="140" rx="50" ry="18"/>
+            <path class="iso-line" stroke="var(--bb-secondary)" d="M30 140 L30 60"/>
+            <path class="iso-line" stroke="var(--bb-secondary)" d="M130 140 L130 60"/>
+            <ellipse class="iso-fill" fill="var(--bb-primary)" cx="80" cy="60" rx="50" ry="18"/>
+            <ellipse class="iso-line" stroke="var(--bb-primary)" stroke-width="1.5" cx="80" cy="60" rx="50" ry="18"/>
+            <path class="iso-line" stroke="var(--bb-secondary)" d="M30 80 Q80 98 130 80" opacity="0.5"/>
+            <path class="iso-line" stroke="var(--bb-secondary)" d="M30 100 Q80 118 130 100" opacity="0.3"/>
+            <path class="iso-line" stroke="var(--bb-secondary)" d="M30 120 Q80 138 130 120" opacity="0.2"/>
+          </svg>
         </div>
-        <div class="bb-grid-cell">
-          <span class="bb-fig-label">03</span>
-          <div><h3 class="bb-title" style="color: var(--bb-text-inverted); font-size: 20px;">Components</h3><p class="bb-body-sm" style="margin-top: 8px;">Buttons, cards, inputs — built on the token layer.</p></div>
+        <div class="bb-grid-cell" style="min-height: 180px;">
+          <span class="bb-fig-label" style="color: var(--bb-text-muted);">03</span>
+          <div>
+            <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px;">Components</h3>
+            <p class="bb-body-sm" style="color: var(--bb-text-muted); margin-top: 8px;">Buttons, cards, inputs — built on the token layer.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 05 — COMPONENTS -->
-  <section id="components" class="section bg-dark">
+  <!-- ================================================
+       05 — COMPONENTS (Cream)
+       ================================================ -->
+  <section id="components" class="section bg-cream">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label">05 / Components</span>
-        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-inverted);">UI kit</h2>
+        <span class="bb-label" style="color: var(--bb-text-muted);">05 / Components</span>
+        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-primary);">UI kit</h2>
       </div>
 
-      <span class="demo-label">Buttons</span>
-      <div class="demo-row" style="margin-bottom: 48px;">
+      <span class="demo-label" style="color: var(--bb-text-muted);">Buttons</span>
+      <div class="demo-row" style="margin-bottom: 32px;">
         <a class="bb-btn bb-btn-primary">Primary</a>
         <a class="bb-btn bb-btn-primary bb-btn-lg">Primary Large</a>
         <a class="bb-btn bb-btn-secondary">Secondary</a>
-        <a class="bb-btn bb-btn-secondary bb-btn-sm">Secondary Small</a>
+        <a class="bb-btn bb-btn-ghost">Ghost</a>
       </div>
-      <div class="demo-row" style="margin-bottom: 48px; background: var(--bb-bg-1); padding: 32px; border-radius: 16px;">
-        <a class="bb-btn bb-btn-outline">Outline</a>
-        <a class="bb-btn bb-btn-outline bb-btn-lg">Outline Large</a>
+      <div style="background: var(--bb-dark); padding: 32px; border-radius: 16px; margin-bottom: 48px;">
+        <span class="demo-label" style="color: var(--bb-text-on-dark-subtle);">On Dark</span>
+        <div class="demo-row" style="margin-bottom: 0;">
+          <a class="bb-btn bb-btn-primary">Primary</a>
+          <a class="bb-btn bb-btn-ghost-dark">Ghost Dark</a>
+        </div>
       </div>
 
-      <span class="demo-label">Badges &amp; Tags</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Badges &amp; Tags</span>
       <div class="demo-row" style="margin-bottom: 48px;">
-        <span class="bb-badge bb-badge-green">Active</span>
-        <span class="bb-badge bb-badge-amber">Warning</span>
-        <span class="bb-badge bb-badge-red">Error</span>
+        <span class="bb-badge bb-badge-primary">Active</span>
+        <span class="bb-badge bb-badge-secondary">Info</span>
         <span class="bb-badge bb-badge-neutral">Neutral</span>
-        <span class="bb-tag">Tag Label</span>
+        <span class="bb-tag bb-tag-warm">Tag Label</span>
       </div>
 
-      <span class="demo-label">Cards — Dark</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Cards — Warm</span>
       <div class="demo-card-grid" style="margin-bottom: 48px;">
-        <div class="bb-card-dark" style="border-radius: 16px; padding: 28px;">
-          <span class="bb-label" style="display: block; margin-bottom: 16px;">Feature</span>
-          <h3 class="bb-title" style="color: var(--bb-text-inverted); margin-bottom: 8px;">Smooth scroll</h3>
-          <p class="bb-body-sm">Lenis-powered smooth scrolling with configurable lerp and duration.</p>
+        <div class="bb-card">
+          <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-muted);">Module</span>
+          <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px; margin-bottom: 8px;">Token system</h3>
+          <p class="bb-body-sm" style="color: var(--bb-text-muted);">CSS custom properties that work everywhere — static HTML, Tailwind, React.</p>
         </div>
-        <div class="bb-card-dark" style="border-radius: 16px; padding: 28px;">
-          <span class="bb-label" style="display: block; margin-bottom: 16px;">Feature</span>
-          <h3 class="bb-title" style="color: var(--bb-text-inverted); margin-bottom: 8px;">Text reveals</h3>
-          <p class="bb-body-sm">Per-character staggered opacity via GSAP ScrollTrigger.</p>
+        <div class="bb-card">
+          <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-muted);">Module</span>
+          <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px; margin-bottom: 8px;">Grid patterns</h3>
+          <p class="bb-body-sm" style="color: var(--bb-text-muted);">Asymmetric line grids with dot overlays for that technical precision feel.</p>
         </div>
-        <div class="bb-card-dark" style="border-radius: 16px; padding: 28px;">
-          <span class="bb-label" style="display: block; margin-bottom: 16px;">Feature</span>
-          <h3 class="bb-title" style="color: var(--bb-text-inverted); margin-bottom: 8px;">Parallax layers</h3>
-          <p class="bb-body-sm">Data-driven parallax transforms with configurable speed.</p>
+        <div class="bb-card">
+          <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-muted);">Module</span>
+          <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px; margin-bottom: 8px;">Animation stack</h3>
+          <p class="bb-body-sm" style="color: var(--bb-text-muted);">Lenis smooth scroll, GSAP text reveals, and parallax — all opt-in.</p>
         </div>
       </div>
 
-      <span class="demo-label" style="color: var(--bb-text-subtle);">Cards — Light</span>
-      <div style="background: var(--bb-bg-1); border-radius: 20px; padding: 32px; margin-bottom: 48px;">
+      <span class="demo-label" style="color: var(--bb-text-muted);">Cards — Dark</span>
+      <div style="background: var(--bb-dark); padding: 32px; border-radius: 20px; margin-bottom: 48px;">
         <div class="demo-card-grid">
-          <div class="bb-card">
-            <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-muted);">Module</span>
-            <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px; margin-bottom: 8px;">Token system</h3>
-            <p class="bb-body-sm" style="color: var(--bb-text-muted);">CSS custom properties that work everywhere.</p>
+          <div class="bb-card-dark" style="padding: 28px;">
+            <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-on-dark-subtle);">Feature</span>
+            <h3 class="bb-title" style="color: var(--bb-text-on-dark); margin-bottom: 8px; font-size: 20px;">Smooth scroll</h3>
+            <p class="bb-body-sm" style="color: var(--bb-text-on-dark-muted);">Lenis-powered with configurable lerp and duration.</p>
           </div>
-          <div class="bb-card">
-            <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-muted);">Module</span>
-            <h3 class="bb-title" style="color: var(--bb-text-primary); font-size: 20px; margin-bottom: 8px;">Grid patterns</h3>
-            <p class="bb-body-sm" style="color: var(--bb-text-muted);">Asymmetric line grids with dot overlays.</p>
+          <div class="bb-card-dark" style="padding: 28px;">
+            <span class="bb-label" style="display: block; margin-bottom: 16px; color: var(--bb-text-on-dark-subtle);">Feature</span>
+            <h3 class="bb-title" style="color: var(--bb-text-on-dark); margin-bottom: 8px; font-size: 20px;">Text reveals</h3>
+            <p class="bb-body-sm" style="color: var(--bb-text-on-dark-muted);">Per-character staggered opacity via GSAP ScrollTrigger.</p>
           </div>
         </div>
       </div>
 
-      <span class="demo-label">Inputs</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Inputs</span>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px;">
         <div>
-          <span class="bb-label" style="display:block; margin-bottom: 8px;">Dark Input</span>
-          <input class="bb-input bb-input-dark" type="text" placeholder="type something...">
-        </div>
-        <div style="background: var(--bb-bg-1); padding: 24px; border-radius: 12px;">
-          <span class="bb-label" style="display:block; margin-bottom: 8px; color: var(--bb-text-muted);">Light Input</span>
+          <span class="bb-label" style="display:block; margin-bottom: 8px; color: var(--bb-text-muted);">Warm Input</span>
           <input class="bb-input" type="text" placeholder="type something...">
+        </div>
+        <div style="background: var(--bb-dark); padding: 24px; border-radius: 12px;">
+          <span class="bb-label" style="display:block; margin-bottom: 8px; color: var(--bb-text-on-dark-subtle);">Dark Input</span>
+          <input class="bb-input bb-input-dark" type="text" placeholder="type something...">
         </div>
       </div>
 
-      <span class="demo-label">Links</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Links</span>
       <div class="demo-row">
-        <a href="#" class="bb-link">Read the docs <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg></a>
-        <a href="#" class="bb-link">View on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg></a>
+        <a href="#" class="bb-link" style="color: var(--bb-text-secondary);">Read the docs <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg></a>
+        <a href="#" class="bb-link" style="color: var(--bb-text-secondary);">View on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg></a>
       </div>
     </div>
   </section>
 
-  <!-- 06 — SPACING & RADIUS -->
+  <!-- ================================================
+       06 — SPACING & RADIUS (Dark)
+       ================================================ -->
   <section id="spacing" class="section bg-dark-2">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label">06 / Spacing &amp; Radius</span>
-        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-inverted);">Scale</h2>
+        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">06 / Spacing &amp; Radius</span>
+        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-on-dark);">Scale</h2>
       </div>
 
-      <span class="demo-label">Spacing Scale (8px base)</span>
+      <span class="demo-label" style="color: var(--bb-text-on-dark-subtle);">Spacing Scale (8px base)</span>
       <div style="max-width: 600px; margin-bottom: 64px;">
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">4</span><div class="spacing-bar" style="width: 4px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">8</span><div class="spacing-bar" style="width: 8px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">16</span><div class="spacing-bar" style="width: 16px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">24</span><div class="spacing-bar" style="width: 24px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">32</span><div class="spacing-bar" style="width: 32px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">48</span><div class="spacing-bar" style="width: 48px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">64</span><div class="spacing-bar" style="width: 64px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">96</span><div class="spacing-bar" style="width: 96px;"></div></div>
-        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;"><span class="bb-mono" style="color: var(--bb-text-subtle); width: 40px; text-align: right;">160</span><div class="spacing-bar" style="width: 160px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">4</span><div class="spacing-bar" style="width: 4px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">8</span><div class="spacing-bar" style="width: 8px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">16</span><div class="spacing-bar" style="width: 16px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">24</span><div class="spacing-bar" style="width: 24px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">32</span><div class="spacing-bar" style="width: 32px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">48</span><div class="spacing-bar" style="width: 48px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">64</span><div class="spacing-bar" style="width: 64px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">96</span><div class="spacing-bar" style="width: 96px;"></div></div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;"><span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); width: 40px; text-align: right;">160</span><div class="spacing-bar" style="width: 160px;"></div></div>
       </div>
 
-      <span class="demo-label">Border Radius</span>
+      <span class="demo-label" style="color: var(--bb-text-on-dark-subtle);">Border Radius</span>
       <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <div><div class="radius-demo" style="border-radius: 2px;">2</div><p class="swatch-hex" style="margin-top: 8px;">2px</p></div>
-        <div><div class="radius-demo" style="border-radius: 4px;">4</div><p class="swatch-hex" style="margin-top: 8px;">4px</p></div>
-        <div><div class="radius-demo" style="border-radius: 8px;">8</div><p class="swatch-hex" style="margin-top: 8px;">8px</p></div>
-        <div><div class="radius-demo" style="border-radius: 12px;">12</div><p class="swatch-hex" style="margin-top: 8px;">12px</p></div>
-        <div><div class="radius-demo" style="border-radius: 16px;">16</div><p class="swatch-hex" style="margin-top: 8px;">16px</p></div>
-        <div><div class="radius-demo" style="border-radius: 24px;">24</div><p class="swatch-hex" style="margin-top: 8px;">24px</p></div>
-        <div><div class="radius-demo" style="border-radius: 32px;">32</div><p class="swatch-hex" style="margin-top: 8px;">32px</p></div>
-        <div><div class="radius-demo" style="border-radius: 100vw; width: 100px;">full</div><p class="swatch-hex" style="margin-top: 8px;">100vw</p></div>
+        <div><div class="radius-demo" style="border-radius: 2px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">2</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">2px</p></div>
+        <div><div class="radius-demo" style="border-radius: 4px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">4</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">4px</p></div>
+        <div><div class="radius-demo" style="border-radius: 8px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">8</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">8px</p></div>
+        <div><div class="radius-demo" style="border-radius: 12px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">12</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">12px</p></div>
+        <div><div class="radius-demo" style="border-radius: 16px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">16</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">16px</p></div>
+        <div><div class="radius-demo" style="border-radius: 24px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">24</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">24px</p></div>
+        <div><div class="radius-demo" style="border-radius: 100vw; width: 100px; background: var(--bb-cream-10); border: 1px solid var(--bb-border-cool-strong); color: var(--bb-text-on-dark-subtle);">full</div><p class="swatch-hex" style="margin-top: 8px; color: var(--bb-text-on-dark-subtle);">100vw</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 07 — ANIMATIONS -->
-  <section id="animations" class="section bg-dark">
+  <!-- ================================================
+       07 — ANIMATIONS (Cream)
+       ================================================ -->
+  <section id="animations" class="section bg-cream-deep">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label">07 / Motion</span>
-        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-inverted);">Animations</h2>
+        <span class="bb-label" style="color: var(--bb-text-muted);">07 / Motion</span>
+        <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-primary);">Animations</h2>
       </div>
 
-      <span class="demo-label">Scroll-driven text reveal — .bb-reveal</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Scroll-driven text reveal — .bb-reveal</span>
       <div style="margin-bottom: 80px;">
-        <p class="bb-subheading bb-reveal" style="color: var(--bb-text-inverted); max-width: 800px;">
+        <p class="bb-subheading bb-reveal" style="color: var(--bb-text-primary); max-width: 800px;">
           Every character fades in as you scroll, creating a reading-paced reveal that draws the eye through the content.
         </p>
       </div>
 
-      <span class="demo-label">Staggered fade-in — .bb-stagger-group</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Staggered fade-in — .bb-stagger-group</span>
       <div class="bb-stagger-group" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 80px;">
-        <div class="bb-card-dark" style="border-radius: 16px; padding: 28px;">
-          <span class="bb-mono" style="color: var(--bb-accent);">01</span>
-          <p class="bb-body-sm" style="margin-top: 12px;">Elements fade up with a staggered delay</p>
+        <div class="bb-card" style="padding: 28px;">
+          <span class="bb-mono" style="color: var(--bb-primary);">01</span>
+          <p class="bb-body-sm" style="margin-top: 12px; color: var(--bb-text-muted);">Elements fade up with a staggered delay</p>
         </div>
-        <div class="bb-card-dark" style="border-radius: 16px; padding: 28px;">
-          <span class="bb-mono" style="color: var(--bb-accent);">02</span>
-          <p class="bb-body-sm" style="margin-top: 12px;">Each child offsets by 100ms</p>
+        <div class="bb-card" style="padding: 28px;">
+          <span class="bb-mono" style="color: var(--bb-primary);">02</span>
+          <p class="bb-body-sm" style="margin-top: 12px; color: var(--bb-text-muted);">Each child offsets by 100ms</p>
         </div>
-        <div class="bb-card-dark" style="border-radius: 16px; padding: 28px;">
-          <span class="bb-mono" style="color: var(--bb-accent);">03</span>
-          <p class="bb-body-sm" style="margin-top: 12px;">Using the bounce easing curve</p>
+        <div class="bb-card" style="padding: 28px;">
+          <span class="bb-mono" style="color: var(--bb-primary);">03</span>
+          <p class="bb-body-sm" style="margin-top: 12px; color: var(--bb-text-muted);">Using the bounce easing curve</p>
         </div>
       </div>
 
-      <span class="demo-label">Easing curves — hover each track</span>
+      <span class="demo-label" style="color: var(--bb-text-muted);">Easing curves — hover each track</span>
       <div style="max-width: 500px;">
         <div>
-          <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 12px;">Standard</span>
-          <div class="easing-track"><div class="easing-dot easing-dot--standard"></div></div>
+          <span class="bb-mono" style="color: var(--bb-text-muted); font-size: 12px;">Standard</span>
+          <div class="easing-track" style="background: var(--bb-border-warm);"><div class="easing-dot easing-dot--standard"></div></div>
         </div>
         <div>
-          <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 12px;">Bounce</span>
-          <div class="easing-track"><div class="easing-dot easing-dot--bounce"></div></div>
+          <span class="bb-mono" style="color: var(--bb-text-muted); font-size: 12px;">Bounce</span>
+          <div class="easing-track" style="background: var(--bb-border-warm);"><div class="easing-dot easing-dot--bounce"></div></div>
         </div>
         <div>
-          <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 12px;">Spring</span>
-          <div class="easing-track"><div class="easing-dot easing-dot--spring"></div></div>
+          <span class="bb-mono" style="color: var(--bb-text-muted); font-size: 12px;">Spring</span>
+          <div class="easing-track" style="background: var(--bb-border-warm);"><div class="easing-dot easing-dot--spring"></div></div>
         </div>
       </div>
 
-      <div style="margin-top: 120px; height: 400px; position: relative; overflow: hidden; border-radius: 20px; background: var(--bb-surface-dark-2); border: 1px solid var(--bb-border-dark-strong);">
-        <div style="position: absolute; top: 20px; left: 24px;" class="bb-label">Parallax — .bb-parallax</div>
-        <div class="bb-parallax" data-speed="0.3" style="position: absolute; top: 80px; left: 15%; width: 120px; height: 120px; border-radius: 16px; background: rgba(212,253,128,0.08); border: 1px solid var(--bb-border-dark-strong);"></div>
-        <div class="bb-parallax" data-speed="0.15" style="position: absolute; top: 120px; right: 20%; width: 180px; height: 180px; border-radius: 50%; background: rgba(212,253,128,0.04); border: 1px solid var(--bb-border-dark);"></div>
-        <div class="bb-parallax" data-speed="0.45" style="position: absolute; top: 200px; left: 45%; width: 80px; height: 80px; border-radius: 8px; background: rgba(250,65,73,0.06); border: 1px solid rgba(250,65,73,0.12);"></div>
+      <!-- Parallax demo on dark -->
+      <div style="margin-top: 120px; height: 400px; position: relative; overflow: hidden; border-radius: 20px; background: var(--bb-dark); border: 1px solid var(--bb-border-warm);">
+        <div style="position: absolute; top: 20px; left: 24px;" class="bb-label" style="color: var(--bb-text-on-dark-subtle);">Parallax — .bb-parallax</div>
+        <div class="bb-parallax" data-speed="0.3" style="position: absolute; top: 80px; left: 15%; width: 120px; height: 120px; border-radius: 16px; background: var(--bb-primary-10); border: 1px solid var(--bb-border-cool-strong);"></div>
+        <div class="bb-parallax" data-speed="0.15" style="position: absolute; top: 120px; right: 20%; width: 180px; height: 180px; border-radius: 50%; background: rgba(52,71,78,0.15); border: 1px solid var(--bb-border-cool);"></div>
+        <div class="bb-parallax" data-speed="0.45" style="position: absolute; top: 200px; left: 45%; width: 80px; height: 80px; border-radius: 8px; background: var(--bb-primary-10); border: 1px solid rgba(254,78,24,0.12);"></div>
+        <!-- Isometric: floating gears -->
+        <div class="bb-parallax" data-speed="0.25" style="position: absolute; top: 100px; left: 55%;">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="30" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="none"/>
+            <circle cx="50" cy="50" r="12" stroke="var(--bb-primary)" stroke-width="1.5" fill="none"/>
+            <circle cx="50" cy="50" r="3" fill="var(--bb-primary)" opacity="0.5"/>
+            <path d="M50 20 L50 8" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+            <path d="M50 80 L50 92" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+            <path d="M20 50 L8 50" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+            <path d="M80 50 L92 50" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="section" style="padding: 48px var(--bb-site-padding); border-top: 1px solid var(--bb-border-dark);">
+  <!-- ================================================
+       FOOTER (Dark)
+       ================================================ -->
+  <footer class="section bg-dark" style="padding: 48px var(--bb-site-padding); border-top: 1px solid var(--bb-border-cool);">
     <div class="section-inner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-      <span class="bb-label-lg" style="color: var(--bb-text-subtle);">BB DS3 — Brightbase Design System v3</span>
+      <span class="bb-label-lg" style="color: var(--bb-text-on-dark-subtle);">BB DS3 — Brightbase Design System v3</span>
       <div style="display: flex; gap: 24px;">
-        <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 12px;">Geist + Fragment Mono</span>
-        <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 12px;">Lenis + GSAP</span>
-        <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 12px;">b150 + Raycast</span>
+        <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">Geist + Fragment Mono</span>
+        <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">Lenis + GSAP</span>
+        <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">b150 + Raycast</span>
       </div>
     </div>
   </footer>

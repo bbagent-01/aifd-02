@@ -1,46 +1,56 @@
 /* ============================================
    BB Tokens — Brightbase Design System v3
-   b150-inspired warm palette + Raycast grid
+   Cream-first warm palette + cool dark sections
    ============================================ */
 
 :root {
   /* ---- Colors: Foundation ---- */
-  --bb-dark: #1f1915;
-  --bb-light: #fffdf6;
-  --bb-accent: #d4fd80;
-  --bb-red: #fa4149;
-  --bb-coral: #fa725a;
+  --bb-primary: #FE4E18;
+  --bb-primary-light: #FF7A4D;
+  --bb-primary-dark: #D93D0F;
+  --bb-secondary: #34474E;
+  --bb-secondary-light: #4A6068;
+  --bb-neutral: #6B7280;
+  --bb-neutral-light: #9CA3AF;
 
-  /* ---- Colors: Warm Backgrounds ---- */
-  --bb-bg-1: #f7f5f1;
-  --bb-bg-2: #f2efe9;
-  --bb-bg-3: #e6e3dd;
+  /* ---- Colors: Warm Surfaces (default) ---- */
+  --bb-cream: #E8E4DD;
+  --bb-cream-light: #F2EFE9;
+  --bb-cream-lighter: #F7F5F1;
+  --bb-cream-lightest: #FFFDF6;
 
-  /* ---- Colors: Dark Surfaces ---- */
-  --bb-surface-dark: #0d0d0d;
-  --bb-surface-dark-2: #141414;
-  --bb-surface-dark-3: #1a1a1a;
-  --bb-surface-dark-card: #111111;
+  /* ---- Colors: Cool Dark Surfaces ---- */
+  --bb-dark: #0D1E24;
+  --bb-dark-2: #132A32;
+  --bb-dark-3: #1A3540;
+  --bb-dark-card: #0F2229;
+  --bb-dark-elevated: #17303A;
 
   /* ---- Colors: Text ---- */
-  --bb-text-primary: #1f1915;
-  --bb-text-muted: #616161;
-  --bb-text-subtle: #9c9c9d;
-  --bb-text-inverted: #f7f5f1;
-  --bb-text-accent: #d4fd80;
+  --bb-text-primary: #0D1E24;
+  --bb-text-secondary: #34474E;
+  --bb-text-muted: #6B7280;
+  --bb-text-subtle: #9CA3AF;
+  --bb-text-on-dark: #E8E4DD;
+  --bb-text-on-dark-muted: #8A9BA3;
+  --bb-text-on-dark-subtle: #5A6E78;
+  --bb-text-on-primary: #FFFDF6;
 
   /* ---- Colors: Borders ---- */
-  --bb-border-light: #e6e3dd;
-  --bb-border-dark: rgba(255, 255, 255, 0.06);
-  --bb-border-dark-strong: rgba(255, 255, 255, 0.12);
+  --bb-border-warm: #D6D1C9;
+  --bb-border-warm-strong: #C4BEB5;
+  --bb-border-cool: rgba(232, 228, 221, 0.08);
+  --bb-border-cool-strong: rgba(232, 228, 221, 0.15);
+  --bb-border-cool-hover: rgba(232, 228, 221, 0.22);
 
   /* ---- Colors: Opacity Variants ---- */
-  --bb-dark-64: rgba(31, 25, 21, 0.64);
-  --bb-light-48: rgba(255, 253, 246, 0.48);
-  --bb-white-6: rgba(255, 255, 255, 0.06);
-  --bb-white-10: rgba(255, 255, 255, 0.10);
-  --bb-white-15: rgba(255, 255, 255, 0.15);
-  --bb-white-90: rgba(255, 255, 255, 0.90);
+  --bb-primary-10: rgba(254, 78, 24, 0.10);
+  --bb-primary-15: rgba(254, 78, 24, 0.15);
+  --bb-primary-20: rgba(254, 78, 24, 0.20);
+  --bb-cream-6: rgba(232, 228, 221, 0.06);
+  --bb-cream-10: rgba(232, 228, 221, 0.10);
+  --bb-cream-15: rgba(232, 228, 221, 0.15);
+  --bb-cream-90: rgba(232, 228, 221, 0.90);
 
   /* ---- Spacing ---- */
   --bb-space-1: 4px;
@@ -73,14 +83,15 @@
   --bb-radius-full: 100vw;
 
   /* ---- Shadows ---- */
-  --bb-shadow-sm: 0 1px 2px rgba(31, 25, 21, 0.05);
-  --bb-shadow-md: 0 4px 12px rgba(31, 25, 21, 0.08);
-  --bb-shadow-lg: 0 12px 32px rgba(31, 25, 21, 0.12);
-  --bb-shadow-xl: 0 30px 50px rgba(0, 0, 0, 0.4);
-  --bb-shadow-glow-accent: 0 0 40px rgba(212, 253, 128, 0.15);
-  --bb-shadow-glow-blue: 0 0 40px rgba(86, 194, 255, 0.12);
-  --bb-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --bb-shadow-card-dark: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+  --bb-shadow-sm: 0 1px 2px rgba(13, 30, 36, 0.04);
+  --bb-shadow-md: 0 4px 12px rgba(13, 30, 36, 0.06);
+  --bb-shadow-lg: 0 12px 32px rgba(13, 30, 36, 0.10);
+  --bb-shadow-xl: 0 30px 50px rgba(13, 30, 36, 0.16);
+  --bb-shadow-glow-primary: 0 0 40px rgba(254, 78, 24, 0.15);
+  --bb-shadow-glow-cool: 0 0 40px rgba(52, 71, 78, 0.12);
+  --bb-shadow-inset-dark: inset 0 1px 0 rgba(232, 228, 221, 0.08), inset 0 0 0 1px rgba(232, 228, 221, 0.06);
+  --bb-shadow-card-dark: inset 0 1px 0 rgba(232, 228, 221, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+  --bb-shadow-card-warm: 0 1px 3px rgba(13, 30, 36, 0.04), 0 0 0 1px rgba(13, 30, 36, 0.03);
 
   /* ---- Easings ---- */
   --bb-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
