@@ -59,7 +59,7 @@
       --bb-font-mono: 'Fragment Mono', 'JetBrains Mono', monospace;
       --bb-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
       --bb-ease-bounce: cubic-bezier(0.23, 1, 0.32, 1);
-      --bb-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --bb-ease-custom: cubic-bezier(0.22, 0.68, 0, 1.2);
       --bb-radius-full: 100vw;
       --bb-site-padding: 32px;
       --bb-max-width: 1440px;
@@ -178,7 +178,22 @@
     }
     .bb-grid--dark .bb-grid-arrow { color: var(--bb-text-on-dark-subtle); }
     .bb-grid--warm .bb-grid-arrow { color: var(--bb-text-muted); }
-    .bb-grid-cell:hover .bb-grid-arrow { color: var(--bb-primary); }
+
+    /* Grid link cells: hover lift + shadow */
+    .bb-grid-link {
+      cursor: pointer;
+      transition: transform 0.3s var(--bb-ease-bounce), box-shadow 0.3s var(--bb-ease-bounce), z-index 0s;
+    }
+    .bb-grid-link:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      z-index: 10;
+    }
+    .bb-grid--warm .bb-grid-link:hover {
+      box-shadow: 0 12px 32px rgba(13, 30, 36, 0.12);
+    }
+    .bb-grid-link:hover .bb-grid-arrow { color: var(--bb-primary); }
+
     .bb-grid-empty { min-height: 48px; }
 
     @media (max-width: 1024px) { .bb-grid-5 { grid-template-columns: repeat(3, 1fr); } }
@@ -348,7 +363,6 @@
     .easing-row:hover .easing-dot { left: calc(100% - 14px); }
     .easing-dot--standard { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
     .easing-dot--bounce { transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
-    .easing-dot--spring { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
 
     /* ================================================
        ISOMETRIC SVG STYLING
@@ -517,7 +531,7 @@
 
       <div class="bb-grid bb-grid--dark bb-grid-5" style="border: 1px solid var(--bb-border-cool-strong);">
         <!-- Row 1 -->
-        <div class="bb-grid-cell bb-col-span-2" style="min-height: 120px;">
+        <div class="bb-grid-cell bb-grid-link bb-col-span-2" style="min-height: 120px;">
           <div>
             <span class="bb-fig-label">Fig_01</span>
             <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
@@ -531,7 +545,7 @@
         <div class="bb-grid-empty"></div>
 
         <!-- Isometric: Stacked Cubes -->
-        <div class="bb-grid-figure bb-dots bb-row-span-2" style="min-height: 400px;">
+        <div class="bb-grid-figure bb-grid-link bb-dots bb-row-span-2" style="min-height: 400px;">
           <span class="bb-fig-label">Fig_02</span>
           <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
           <!-- Type 2: UI Mockup — Dashboard Window -->
@@ -639,7 +653,7 @@
         <!-- Row 3 -->
         <div class="bb-grid-empty"></div>
 
-        <div class="bb-grid-cell">
+        <div class="bb-grid-cell bb-grid-link">
           <div>
             <span class="bb-fig-label">Fig_05</span>
             <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
@@ -651,7 +665,7 @@
         </div>
 
         <!-- Isometric: Layered Cards -->
-        <div class="bb-grid-figure bb-dots bb-col-span-2">
+        <div class="bb-grid-figure bb-grid-link bb-dots bb-col-span-2">
           <span class="bb-fig-label">Fig_06</span>
           <svg class="bb-grid-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H6M12 4V10"/></svg>
           <!-- Type 3: Isometric Geometric — Stacked Platform -->
@@ -905,14 +919,47 @@
           </div>
           <div class="easing-track" style="background: var(--bb-border-warm);"><div class="easing-dot easing-dot--bounce"></div></div>
         </div>
-        <div class="easing-row" style="border: 1px solid var(--bb-border-warm);">
+        <div class="easing-row" id="custom-easing-row" style="border: 1px solid var(--bb-primary); border-style: dashed;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="bb-mono" style="color: var(--bb-text-secondary); font-size: 13px; font-weight: 500;">Spring</span>
-            <span class="bb-mono" style="color: var(--bb-text-subtle); font-size: 11px;">cubic-bezier(0.34, 1.56, 0.64, 1)</span>
+            <span class="bb-mono" style="color: var(--bb-text-secondary); font-size: 13px; font-weight: 500;">Custom</span>
+            <span class="bb-mono" id="custom-easing-label" style="color: var(--bb-primary); font-size: 11px;">cubic-bezier(0.22, 0.68, 0, 1.2)</span>
           </div>
-          <div class="easing-track" style="background: var(--bb-border-warm);"><div class="easing-dot easing-dot--spring"></div></div>
+          <div class="easing-track" style="background: var(--bb-border-warm);"><div class="easing-dot" id="custom-easing-dot" style="transition-timing-function: cubic-bezier(0.22, 0.68, 0, 1.2);"></div></div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px;">
+            <div>
+              <label class="bb-mono" style="font-size: 10px; color: var(--bb-text-subtle); display: block; margin-bottom: 4px;">x1</label>
+              <input type="number" id="bez-x1" value="0.22" step="0.01" min="0" max="1" style="width: 100%; padding: 6px 8px; font-family: var(--bb-font-mono); font-size: 13px; background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm); border-radius: 6px; color: var(--bb-text-primary); outline: none;">
+            </div>
+            <div>
+              <label class="bb-mono" style="font-size: 10px; color: var(--bb-text-subtle); display: block; margin-bottom: 4px;">y1</label>
+              <input type="number" id="bez-y1" value="0.68" step="0.01" min="-2" max="2" style="width: 100%; padding: 6px 8px; font-family: var(--bb-font-mono); font-size: 13px; background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm); border-radius: 6px; color: var(--bb-text-primary); outline: none;">
+            </div>
+            <div>
+              <label class="bb-mono" style="font-size: 10px; color: var(--bb-text-subtle); display: block; margin-bottom: 4px;">x2</label>
+              <input type="number" id="bez-x2" value="0" step="0.01" min="0" max="1" style="width: 100%; padding: 6px 8px; font-family: var(--bb-font-mono); font-size: 13px; background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm); border-radius: 6px; color: var(--bb-text-primary); outline: none;">
+            </div>
+            <div>
+              <label class="bb-mono" style="font-size: 10px; color: var(--bb-text-subtle); display: block; margin-bottom: 4px;">y2</label>
+              <input type="number" id="bez-y2" value="1.2" step="0.01" min="-2" max="2" style="width: 100%; padding: 6px 8px; font-family: var(--bb-font-mono); font-size: 13px; background: var(--bb-cream-lightest); border: 1px solid var(--bb-border-warm); border-radius: 6px; color: var(--bb-text-primary); outline: none;">
+            </div>
+          </div>
         </div>
       </div>
+      <script>
+        // Custom easing curve editor
+        document.addEventListener('DOMContentLoaded', () => {
+          const inputs = ['bez-x1','bez-y1','bez-x2','bez-y2'].map(id => document.getElementById(id));
+          const dot = document.getElementById('custom-easing-dot');
+          const label = document.getElementById('custom-easing-label');
+          function update() {
+            const vals = inputs.map(i => parseFloat(i.value) || 0);
+            const bez = `cubic-bezier(${vals.join(', ')})`;
+            dot.style.transitionTimingFunction = bez;
+            label.textContent = bez;
+          }
+          inputs.forEach(i => i.addEventListener('input', update));
+        });
+      </script>
 
       <!-- Parallax demo — split layout -->
       <span class="demo-label" style="color: var(--bb-text-muted); margin-top: 80px; display: block;">Parallax — .bb-parallax (split layout)</span>
@@ -976,12 +1023,202 @@
   </section>
 
   <!-- ================================================
-       08 — HERO VARIANTS (Dark)
+       08 — ILLUSTRATIONS (Dark)
+       ================================================ -->
+  <section id="illustrations" class="section bg-dark">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">08 / Illustrations</span>
+        <h2 class="bb-heading" style="color: var(--bb-text-on-dark);">Visual language</h2>
+      </div>
+
+      <p class="bb-body" style="color: var(--bb-text-on-dark-muted); max-width: 600px; margin-bottom: 80px;">
+        Three illustration types create a cohesive visual system. Each type serves a different purpose — from abstract concepts to concrete UI references.
+      </p>
+
+      <!-- Type 1: Semi-flat Diagrams -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 96px;">
+        <div>
+          <span class="bb-tag bb-tag-cool" style="margin-bottom: 20px; display: inline-block;">Type 01</span>
+          <h3 class="bb-subheading" style="color: var(--bb-text-on-dark); margin-bottom: 16px; font-size: 32px;">Semi-flat diagrams</h3>
+          <p class="bb-body" style="color: var(--bb-text-on-dark-muted); margin-bottom: 24px;">
+            Architecture flows, decision trees, and system maps. Nodes connected by solid and dashed lines, with the primary accent highlighting the active path. Used for explaining processes, workflows, and technical concepts.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 20px; height: 2px; background: var(--bb-primary);"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Solid lines — active connections</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 20px; height: 0; border-top: 2px dashed var(--bb-text-on-dark-subtle);"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Dashed lines — secondary paths</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--bb-primary); opacity: 0.5;"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Accent fills — active nodes</span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; background: var(--bb-dark-card); border: 1px solid var(--bb-border-cool-strong); border-radius: 20px; padding: 48px; min-height: 360px;">
+          <svg viewBox="0 0 280 300" fill="none" style="width: 100%; max-width: 260px;">
+            <!-- Top node -->
+            <rect x="100" y="10" width="80" height="36" rx="6" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.1"/>
+            <rect x="116" y="22" width="48" height="4" rx="2" fill="var(--bb-primary)" opacity="0.6"/>
+            <path d="M140 46 L140 72" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+            <circle cx="140" cy="72" r="3" fill="var(--bb-text-on-dark-subtle)" opacity="0.5"/>
+            <!-- Middle row -->
+            <rect x="20" y="82" width="60" height="36" rx="6" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="none"/>
+            <rect x="32" y="94" width="28" height="4" rx="2" fill="var(--bb-text-on-dark-subtle)" opacity="0.3"/>
+            <rect x="110" y="82" width="60" height="36" rx="6" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.08"/>
+            <rect x="122" y="94" width="32" height="4" rx="2" fill="var(--bb-primary)" opacity="0.5"/>
+            <rect x="200" y="82" width="60" height="36" rx="6" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="none"/>
+            <rect x="212" y="94" width="30" height="4" rx="2" fill="var(--bb-text-on-dark-subtle)" opacity="0.3"/>
+            <!-- Connectors -->
+            <path d="M140 72 L50 82" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+            <path d="M140 72 L140 82" stroke="var(--bb-primary)" stroke-width="1"/>
+            <path d="M140 72 L230 82" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1"/>
+            <path d="M50 118 L50 152" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" stroke-dasharray="3 3"/>
+            <path d="M140 118 L140 152" stroke="var(--bb-primary)" stroke-width="1"/>
+            <path d="M230 118 L230 152" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" stroke-dasharray="3 3"/>
+            <!-- Bottom pills -->
+            <rect x="20" y="152" width="60" height="28" rx="14" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="none"/>
+            <rect x="34" y="162" width="32" height="4" rx="2" fill="var(--bb-text-on-dark-subtle)" opacity="0.25"/>
+            <rect x="110" y="152" width="60" height="28" rx="14" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.1"/>
+            <rect x="124" y="162" width="32" height="4" rx="2" fill="var(--bb-primary)" opacity="0.5"/>
+            <rect x="200" y="152" width="60" height="28" rx="14" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="none"/>
+            <rect x="214" y="162" width="32" height="4" rx="2" fill="var(--bb-text-on-dark-subtle)" opacity="0.25"/>
+            <!-- Final merge -->
+            <path d="M50 180 L140 210" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" stroke-dasharray="3 3"/>
+            <path d="M140 180 L140 210" stroke="var(--bb-primary)" stroke-width="1"/>
+            <path d="M230 180 L140 210" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="140" cy="210" r="4" fill="var(--bb-primary)" opacity="0.6"/>
+            <rect x="110" y="222" width="60" height="20" rx="4" stroke="var(--bb-primary)" stroke-width="1" fill="var(--bb-primary)" fill-opacity="0.12"/>
+            <rect x="122" y="229" width="36" height="4" rx="2" fill="var(--bb-primary)" opacity="0.4"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Type 2: UI Mockups -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 96px;">
+        <div style="display: flex; align-items: center; justify-content: center; background: var(--bb-dark-card); border: 1px solid var(--bb-border-cool-strong); border-radius: 20px; padding: 48px; min-height: 400px;">
+          <svg viewBox="0 0 300 360" fill="none" style="width: 100%; max-width: 280px;">
+            <!-- Window frame -->
+            <rect x="10" y="20" width="280" height="320" rx="10" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="var(--bb-dark-card)"/>
+            <rect x="10" y="20" width="280" height="34" rx="10" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="none"/>
+            <rect x="10" y="46" width="280" height="8" fill="var(--bb-dark-card)"/>
+            <circle cx="30" cy="37" r="4.5" fill="var(--bb-primary)" opacity="0.8"/>
+            <circle cx="46" cy="37" r="4.5" fill="var(--bb-text-on-dark-subtle)" opacity="0.3"/>
+            <circle cx="62" cy="37" r="4.5" fill="var(--bb-text-on-dark-subtle)" opacity="0.3"/>
+            <!-- Sidebar -->
+            <rect x="10" y="54" width="70" height="286" fill="var(--bb-dark)" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5"/>
+            <rect x="22" y="72" width="46" height="5" rx="2.5" fill="var(--bb-text-on-dark-subtle)" opacity="0.4"/>
+            <rect x="22" y="88" width="34" height="5" rx="2.5" fill="var(--bb-text-on-dark-subtle)" opacity="0.25"/>
+            <rect x="22" y="104" width="40" height="5" rx="2.5" fill="var(--bb-primary)" opacity="0.6"/>
+            <rect x="22" y="120" width="30" height="5" rx="2.5" fill="var(--bb-text-on-dark-subtle)" opacity="0.25"/>
+            <!-- Header -->
+            <rect x="92" y="68" width="100" height="8" rx="3" fill="var(--bb-text-on-dark-subtle)" opacity="0.25"/>
+            <!-- Stat cards row -->
+            <rect x="92" y="96" width="88" height="56" rx="8" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" fill="none"/>
+            <rect x="104" y="110" width="28" height="7" rx="3" fill="var(--bb-primary)" opacity="0.5"/>
+            <rect x="104" y="124" width="48" height="4" rx="2" fill="var(--bb-text-on-dark-subtle)" opacity="0.2"/>
+            <rect x="192" y="96" width="88" height="56" rx="8" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" fill="none"/>
+            <rect x="204" y="110" width="24" height="7" rx="3" fill="var(--bb-primary)" opacity="0.5"/>
+            <rect x="204" y="124" width="40" height="4" rx="2" fill="var(--bb-text-on-dark-subtle)" opacity="0.2"/>
+            <!-- Chart -->
+            <rect x="92" y="260" width="24" height="68" rx="3" fill="var(--bb-primary)" opacity="0.2"/>
+            <rect x="122" y="230" width="24" height="98" rx="3" fill="var(--bb-primary)" opacity="0.35"/>
+            <rect x="152" y="250" width="24" height="78" rx="3" fill="var(--bb-primary)" opacity="0.25"/>
+            <rect x="182" y="210" width="24" height="118" rx="3" fill="var(--bb-primary)" opacity="0.5"/>
+            <rect x="212" y="240" width="24" height="88" rx="3" fill="var(--bb-primary)" opacity="0.3"/>
+            <rect x="242" y="190" width="24" height="138" rx="3" fill="var(--bb-primary)" opacity="0.7"/>
+            <!-- Table rows -->
+            <rect x="92" y="170" width="188" height="1" fill="var(--bb-text-on-dark-subtle)" opacity="0.15"/>
+            <rect x="92" y="186" width="188" height="1" fill="var(--bb-text-on-dark-subtle)" opacity="0.15"/>
+          </svg>
+        </div>
+        <div>
+          <span class="bb-tag bb-tag-cool" style="margin-bottom: 20px; display: inline-block;">Type 02</span>
+          <h3 class="bb-subheading" style="color: var(--bb-text-on-dark); margin-bottom: 16px; font-size: 32px;">UI mockups</h3>
+          <p class="bb-body" style="color: var(--bb-text-on-dark-muted); margin-bottom: 24px;">
+            Simplified app interfaces — dashboards, widget cards, and data views. Flat construction with minimal fills, window chrome with traffic lights, and bar charts or sparklines to suggest data. Used for product features and SaaS contexts.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--bb-text-on-dark-subtle);"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Window frame with title bar dots</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 12px; height: 12px; border-radius: 3px; background: var(--bb-primary); opacity: 0.3;"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Accent bars for charts and metrics</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 12px; height: 3px; background: var(--bb-text-on-dark-subtle); opacity: 0.3; border-radius: 1px;"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Placeholder bars for text content</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type 3: Isometric Geometric -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+        <div>
+          <span class="bb-tag bb-tag-cool" style="margin-bottom: 20px; display: inline-block;">Type 03</span>
+          <h3 class="bb-subheading" style="color: var(--bb-text-on-dark); margin-bottom: 16px; font-size: 32px;">Isometric geometry</h3>
+          <p class="bb-body" style="color: var(--bb-text-on-dark-muted); margin-bottom: 24px;">
+            Stacked platforms, layered cubes, and abstract 3D forms at 30-degree angles. Grid lines on surfaces for technical precision. Used for abstract concepts like infrastructure, architecture layers, and platform capabilities.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 16px; height: 10px; background: var(--bb-text-on-dark-subtle); opacity: 0.15; transform: skewX(-20deg);"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Subtle fills for depth layers</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 16px; height: 10px; background: var(--bb-primary); opacity: 0.25; transform: skewX(-20deg);"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Accent platform — top layer</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--bb-primary); background: var(--bb-primary); opacity: 0.3;"></span>
+              <span class="bb-mono" style="color: var(--bb-text-on-dark-muted); font-size: 12px;">Floating elements — emphasis</span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; background: var(--bb-dark-card); border: 1px solid var(--bb-border-cool-strong); border-radius: 20px; padding: 48px; min-height: 360px;">
+          <svg viewBox="0 0 300 300" fill="none" style="width: 100%; max-width: 280px;">
+            <!-- Bottom platform -->
+            <path d="M150 270 L280 195 L280 178 L150 253 Z" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="var(--bb-text-on-dark-subtle)" fill-opacity="0.05"/>
+            <path d="M150 270 L20 195 L20 178 L150 253 Z" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="var(--bb-text-on-dark-subtle)" fill-opacity="0.03"/>
+            <path d="M150 253 L280 178 L150 103 L20 178 Z" stroke="var(--bb-text-on-dark-subtle)" stroke-width="1" fill="var(--bb-text-on-dark-subtle)" fill-opacity="0.08"/>
+            <!-- Grid on top face -->
+            <path d="M85 178 L215 103" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" opacity="0.3"/>
+            <path d="M60 165 L190 90" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" opacity="0.2"/>
+            <path d="M150 103 L150 253" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" opacity="0.15"/>
+            <path d="M85 140 L85 215" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" opacity="0.15"/>
+            <path d="M215 140 L215 215" stroke="var(--bb-text-on-dark-subtle)" stroke-width="0.5" opacity="0.15"/>
+            <!-- Middle platform -->
+            <path d="M150 210 L250 155 L250 142 L150 197 Z" stroke="var(--bb-secondary)" stroke-width="1" fill="var(--bb-secondary)" fill-opacity="0.15"/>
+            <path d="M150 210 L50 155 L50 142 L150 197 Z" stroke="var(--bb-secondary)" stroke-width="1" fill="var(--bb-secondary)" fill-opacity="0.1"/>
+            <path d="M150 197 L250 142 L150 87 L50 142 Z" stroke="var(--bb-secondary)" stroke-width="1" fill="var(--bb-secondary)" fill-opacity="0.12"/>
+            <!-- Top platform (accent) -->
+            <path d="M150 160 L220 120 L220 108 L150 148 Z" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.2"/>
+            <path d="M150 160 L80 120 L80 108 L150 148 Z" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.15"/>
+            <path d="M150 148 L220 108 L150 68 L80 108 Z" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.25"/>
+            <!-- Floating element -->
+            <circle cx="150" cy="45" r="10" stroke="var(--bb-primary)" stroke-width="1.5" fill="var(--bb-primary)" fill-opacity="0.15"/>
+            <circle cx="150" cy="45" r="4" fill="var(--bb-primary)" opacity="0.6"/>
+            <path d="M150 55 L150 68" stroke="var(--bb-primary)" stroke-width="1" opacity="0.4"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       09 — HERO VARIANTS (Dark)
        ================================================ -->
   <section id="heroes" class="section bg-dark">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">08 / Heroes</span>
+        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">09 / Heroes</span>
         <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-on-dark);">Hero variants</h2>
       </div>
 
@@ -1048,7 +1285,7 @@
   <section id="cta" class="section bg-cream">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label" style="color: var(--bb-text-muted);">09 / CTA</span>
+        <span class="bb-label" style="color: var(--bb-text-muted);">10 / CTA</span>
         <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-primary);">Call to action</h2>
       </div>
 
@@ -1087,7 +1324,7 @@
   <section id="testimonials" class="section bg-dark-2">
     <div class="section-inner">
       <div class="section-header">
-        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">10 / Testimonials</span>
+        <span class="bb-label" style="color: var(--bb-text-on-dark-subtle);">11 / Testimonials</span>
         <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-on-dark);">Social proof</h2>
       </div>
 
@@ -1160,7 +1397,7 @@
   <section id="pricing" class="section bg-cream">
     <div class="section-inner">
       <div class="section-header" style="text-align: center;">
-        <span class="bb-label" style="color: var(--bb-text-muted); display: block; margin-bottom: 24px;">11 / Pricing</span>
+        <span class="bb-label" style="color: var(--bb-text-muted); display: block; margin-bottom: 24px;">12 / Pricing</span>
         <h2 class="bb-heading bb-reveal" style="color: var(--bb-text-primary);">Tier cards</h2>
       </div>
 
@@ -1277,7 +1514,7 @@
         <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">© 2026 Brightbase. All rights reserved.</span>
         <div style="display: flex; gap: 24px;">
           <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">Geist + Fragment Mono</span>
-          <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">b150 + Raycast</span>
+          <span class="bb-mono" style="color: var(--bb-text-on-dark-subtle); font-size: 12px;">Lenis + GSAP</span>
         </div>
       </div>
     </div>

@@ -2,12 +2,11 @@
    BB Animations — Brightbase Animation Stack
    Lenis smooth scroll + GSAP ScrollTrigger
 
-   Animation classes:
-   .bb-reveal        — headline slide-up from baseline (word stagger)
-   .bb-fade-text     — paragraph left-to-right fade (line-level)
-   .bb-fade-in       — element fade up on scroll
-   .bb-stagger-group — children stagger fade up
-   .bb-parallax      — scroll-driven Y transform (data-speed)
+   Rules:
+   - h1, h2, .bb-reveal → word slide-up from baseline
+   - All other text → scroll-driven opacity fade (scrub)
+   - All elements → stagger load on scroll entry
+   - All animations retrigger when scrolling back
    ============================================ */
 
 (function () {
@@ -39,50 +38,49 @@
   }
 
   // ---- Headline: Slide Up from Baseline (word stagger) ----
+  // Applies to: h1, h2, .bb-reveal
   function initHeadlineReveals() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    // Select all h1, h2, and .bb-reveal that haven't been processed
+    const targets = document.querySelectorAll('h1, h2, h3.bb-reveal, .bb-reveal');
+    const processed = new Set();
 
-    const revealElements = document.querySelectorAll('.bb-reveal');
+    targets.forEach((el) => {
+      if (processed.has(el)) return;
+      processed.add(el);
 
-    revealElements.forEach((el) => {
-      // Split by words using SplitType if available
+      // Skip elements inside cards/grid cells — they get stagger treatment
+      if (el.closest('.bb-card, .bb-card-dark') && !el.classList.contains('bb-reveal')) return;
+
       if (typeof SplitType !== 'undefined') {
         const split = new SplitType(el, { types: 'words' });
 
-        // Wrap each word in an overflow-hidden container for the clip effect
         split.words.forEach((word) => {
           const wrapper = document.createElement('span');
           wrapper.style.display = 'inline-block';
           wrapper.style.overflow = 'hidden';
           wrapper.style.verticalAlign = 'top';
-          wrapper.style.paddingBottom = '0.08em'; // room for descenders
+          wrapper.style.paddingBottom = '0.1em';
           word.parentNode.insertBefore(wrapper, word);
           wrapper.appendChild(word);
         });
 
-        // Set initial state — pushed below baseline
-        gsap.set(split.words, {
-          yPercent: 110,
-          opacity: 0,
-        });
+        gsap.set(split.words, { yPercent: 110, opacity: 0 });
 
-        // Animate up into place
         gsap.to(split.words, {
           yPercent: 0,
           opacity: 1,
           duration: 0.8,
-          stagger: 0.04, // very small word stagger
+          stagger: 0.04,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: el,
             start: 'top 85%',
-            toggleActions: 'play none none none',
+            toggleActions: 'play reverse play reverse',
           },
         });
       } else {
-        // Fallback without SplitType
         gsap.set(el, { y: 40, opacity: 0 });
         gsap.to(el, {
           y: 0,
@@ -92,94 +90,73 @@
           scrollTrigger: {
             trigger: el,
             start: 'top 85%',
-            toggleActions: 'play none none none',
+            toggleActions: 'play reverse play reverse',
           },
         });
       }
     });
   }
 
-  // ---- Paragraph: Left-to-Right Fade (line-level) ----
-  function initTextFades() {
+  // ---- Body Text: Scroll-driven opacity fade ----
+  // Applies to: all text elements that aren't h1/h2
+  function initBodyTextFades() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    const fadeTextElements = document.querySelectorAll('.bb-fade-text');
+    // Select body text, labels, descriptions — everything not h1/h2
+    const textSelectors = [
+      'h3:not(.bb-reveal)',
+      'h4', 'h5', 'h6',
+      '.bb-subheading:not(.bb-reveal)',
+      '.bb-title:not(.bb-reveal)',
+      '.bb-body',
+      '.bb-body-sm',
+      '.bb-label',
+      '.bb-label-lg',
+      '.bb-mono',
+      '.hero-description',
+      '.demo-label',
+      'p:not([class])',
+    ].join(', ');
 
-    fadeTextElements.forEach((el) => {
-      if (typeof SplitType !== 'undefined') {
-        const split = new SplitType(el, { types: 'lines' });
+    const allText = document.querySelectorAll(textSelectors);
+    const processed = new Set();
 
-        gsap.set(split.lines, {
-          opacity: 0,
-          x: -20,
-          filter: 'blur(2px)',
-        });
+    allText.forEach((el) => {
+      if (processed.has(el)) return;
+      processed.add(el);
 
-        gsap.to(split.lines, {
-          opacity: 1,
-          x: 0,
-          filter: 'blur(0px)',
-          duration: 0.6,
-          stagger: 0.08,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        });
-      } else {
-        // Fallback
-        gsap.set(el, { opacity: 0, x: -20 });
-        gsap.to(el, {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        });
-      }
-    });
-  }
+      // Skip text inside elements that get stagger treatment
+      if (el.closest('.bb-stagger-group, .bb-card, .bb-card-dark, .bb-grid-cell, .bb-grid-figure, footer, nav')) return;
+      // Skip SplitType-generated wrappers
+      if (el.classList.contains('word') || el.classList.contains('line') || el.classList.contains('char')) return;
 
-  // ---- Fade-in on scroll (single elements) ----
-  function initFadeIns() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.set(el, { opacity: 0, y: 12 });
 
-    const elements = document.querySelectorAll('.bb-fade-in');
-    if (!elements.length) return;
-
-    elements.forEach((el) => {
-      gsap.set(el, { y: 30, opacity: 0 });
       gsap.to(el, {
-        y: 0,
         opacity: 1,
-        duration: 0.7,
-        ease: 'power2.out',
+        y: 0,
+        duration: 0.5,
+        ease: 'none',
         scrollTrigger: {
           trigger: el,
-          start: 'top 90%',
-          toggleActions: 'play none none none',
+          start: 'top 92%',
+          end: 'top 65%',
+          scrub: 0.8,
+          toggleActions: 'play reverse play reverse',
         },
       });
     });
   }
 
-  // ---- Staggered fade-in for groups ----
+  // ---- Stagger load for all element groups ----
   function initStaggerGroups() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
+    // Explicit stagger groups
     const groups = document.querySelectorAll('.bb-stagger-group');
     groups.forEach((group) => {
       const children = Array.from(group.children);
-
-      // Set initial state explicitly
       gsap.set(children, { y: 40, opacity: 0 });
-
       gsap.to(children, {
         y: 0,
         opacity: 1,
@@ -189,7 +166,81 @@
         scrollTrigger: {
           trigger: group,
           start: 'top 85%',
-          toggleActions: 'play none none none',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+    });
+
+    // Auto-stagger: swatch rows, demo rows, button rows
+    const autoGroups = document.querySelectorAll('.swatch-row, .demo-row');
+    autoGroups.forEach((group) => {
+      const children = Array.from(group.children);
+      if (children.length < 2) return;
+      gsap.set(children, { y: 20, opacity: 0 });
+      gsap.to(children, {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.06,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 90%',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+    });
+  }
+
+  // ---- Fade-in for standalone elements ----
+  function initFadeIns() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    // Auto-apply to cards, inputs, sections not in stagger groups
+    const autoTargets = document.querySelectorAll(
+      '.bb-card:not(.bb-stagger-group *), ' +
+      '.bb-card-dark:not(.bb-stagger-group *), ' +
+      '.bb-fade-in, ' +
+      '.easing-row, ' +
+      '.radius-demo'
+    );
+
+    autoTargets.forEach((el) => {
+      if (el.closest('.bb-stagger-group')) return;
+
+      gsap.set(el, { y: 30, opacity: 0 });
+      gsap.to(el, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+    });
+  }
+
+  // ---- Grid cells: stagger within grid ----
+  function initGridAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    const grids = document.querySelectorAll('.bb-grid');
+    grids.forEach((grid) => {
+      const cells = Array.from(grid.children);
+      gsap.set(cells, { opacity: 0, y: 20 });
+      gsap.to(cells, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.06,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: grid,
+          start: 'top 85%',
+          toggleActions: 'play reverse play reverse',
         },
       });
     });
@@ -215,49 +266,20 @@
     });
   }
 
-  // ---- Auto-apply fade-in to common elements ----
-  function autoApplyAnimations() {
-    // Apply bb-fade-in to cards, badges, buttons rows, inputs, demo rows
-    // that don't already have an animation class
-    const autoTargets = document.querySelectorAll(
-      '.bb-card:not(.bb-fade-in):not(.bb-stagger-group *), ' +
-      '.bb-card-dark:not(.bb-fade-in):not(.bb-stagger-group *), ' +
-      '.demo-card-grid:not(.bb-stagger-group), ' +
-      '.swatch-row, ' +
-      '.demo-row:not(.bb-stagger-group *)'
-    );
-
-    autoTargets.forEach((el) => {
-      if (!el.closest('.bb-stagger-group')) {
-        el.classList.add('bb-fade-in');
-      }
-    });
-
-    // Apply bb-fade-text to body text that doesn't have an animation class
-    const autoText = document.querySelectorAll(
-      '.bb-body:not(.bb-fade-text):not(.bb-reveal):not(.bb-fade-in), ' +
-      '.bb-body-sm:not(.bb-fade-text):not(.bb-reveal):not(.bb-fade-in):not(.bb-stagger-group *):not(.bb-card *):not(.bb-card-dark *):not(.bb-grid-cell *)'
-    );
-
-    autoText.forEach((el) => {
-      // Only top-level body text, not inside cards
-      if (!el.closest('.bb-card, .bb-card-dark, .bb-grid-cell, .bb-grid-figure, .bb-stagger-group, footer')) {
-        el.classList.add('bb-fade-text');
-      }
-    });
-  }
-
-  // ---- Initialize everything on DOM ready ----
+  // ---- Initialize everything ----
   document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+
     initLenis();
 
-    // Small delay to ensure fonts/SplitType are ready
     requestAnimationFrame(() => {
-      autoApplyAnimations();
       initHeadlineReveals();
-      initTextFades();
-      initFadeIns();
+      initBodyTextFades();
       initStaggerGroups();
+      initGridAnimations();
+      initFadeIns();
       initParallax();
     });
   });
